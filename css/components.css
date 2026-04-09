@@ -1,0 +1,236 @@
+/* ============================================
+   COMPONENTES ESPECÍFICOS
+   ============================================ */
+
+/* Estilos adicionales de componentes que complementan styles.css */
+
+/* ANIMACIONES SUAVES */
+.resource-card {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ESTADO HOVER MEJORADO */
+.tag-button:hover,
+.category-item label:hover {
+  cursor: pointer;
+}
+
+/* FOCUS STYLES MEJORADOS */
+.search-input:focus-visible,
+.category-checkbox:focus-visible,
+.tag-button:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* BORDES DECORATIVOS */
+.card-divider {
+  opacity: 0.8;
+}
+
+/* ESTILOS PARA TIPOGRAFÍA EN TARJETAS */
+.card-title {
+  word-break: break-word;
+  hyphens: auto;
+}
+
+/* LISTAS EN TARJETAS */
+.card-services,
+.card-tags {
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+
+/* ICONOS EN CONTACTOS */
+.contact-item {
+  align-items: flex-start;
+  word-break: break-word;
+}
+
+/* AJUSTES PARA PANTALLAS ALTAS */
+@media (min-height: 900px) {
+  .sidebar {
+    position: sticky;
+    top: 180px;
+  }
+}
+
+/* MODO OSCURO FUTURO (PREPARACIÓN) */
+@media (prefers-color-scheme: dark) {
+  /* Mantener tema vintage en ambos modos por ahora */
+}
+
+/* IMPRESIÓN */
+@media print {
+  .header,
+  .footer,
+  .sidebar,
+  .search-container {
+    display: none !important;
+  }
+
+  .main-content {
+    width: 100%;
+  }
+
+  .resource-card {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 20px;
+  }
+}
+
+/* BOTONES CON ICONOS */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+/* SELECTOR MÓVIL */
+@media (max-width: 767px) {
+  .toggle-filters-btn {
+    width: 100%;
+    margin-bottom: 16px;
+  }
+
+  .sidebar.active {
+    position: fixed;
+    top: 180px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 90;
+    max-width: 100%;
+    border-radius: 0;
+    overflow-y: auto;
+  }
+}
+
+/* NOTIFICACIONES */
+.notification {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 16px 24px;
+  border-radius: 6px;
+  z-index: 2000;
+  animation: slideIn 0.3s ease;
+  max-width: 300px;
+  word-wrap: break-word;
+}
+
+.notification-success {
+  background-color: #6CAA96;
+}
+
+.notification-error {
+  background-color: #D2691E;
+}
+
+.notification-info {
+  background-color: #8B4513;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  to {
+    transform: translateX(400px);
+    opacity: 0;
+  }
+}
+
+@keyframes levelUp {
+  0% {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* SCROLL SUAVE */
+html {
+  scroll-behavior: smooth;
+}
+
+/* OVERFLOW HANDLING */
+.card-section-content,
+.card-title,
+.empty-state h3 {
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+/* ACCESIBILIDAD - SKIP LINK (OPCIONAL FUTURO) */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background-color: var(--color-primary);
+  color: white;
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* REDUCIR ANIMACIONES PARA USUARIO CON PREFERENCIA */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}

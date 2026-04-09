@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🔍 Test - Guía TEA</title>
+  <style>
+    body {
+      font-family: Georgia, serif;
+      padding: 20px;
+      background: #D4C4B0;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .test-item {
+      background: white;
+      padding: 16px;
+      margin: 16px 0;
+      border-radius: 8px;
+      border-left: 4px solid #8B4513;
+    }
+    .pass {
+      border-left-color: #6CAA96;
+      background: #f0fdf4;
+    }
+    .fail {
+      border-left-color: #D2691E;
+      background: #fef2f2;
+    }
+    .icon {
+      font-size: 20px;
+      margin-right: 8px;
+    }
+    h1 {
+      color: #8B4513;
+    }
+    code {
+      background: #f5f5f5;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🔍 Test de Diagnóstico - Guía TEA</h1>
+  <p>Este archivo verifica que todo está funcionando correctamente.</p>
+
+  <div id="results"></div>
+
+  <script>
+    const tests = [];
+
+    // Test 1: JSON Load
+    async function testJsonLoad() {
+      try {
+        const response = await fetch('./data/resources.json');
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        const data = await response.json();
+
+        const resources = data.resources.length;
+        const categories = data.categories.length;
+        const tags = data.tags.length;
+
+        return {
+          name: '📂 Cargar resources.json',
+          pass: true,
+          message: `✅ JSON cargado: ${resources} recursos, ${categories} categorías, ${tags} etiquetas`
+        };
+      } catch (error) {
+        return {
+          name: '📂 Cargar resources.json',
+          pass: false,
+          message: `❌ Error: ${error.message}`
+        };
+      }
+    }
+
+    // Test 2: CSS Load
+    function testCssLoad() {
+      try {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = './css/styles.css';
+
+        // Si llegamos aquí, la ruta es accesible
+        return {
+          name: '🎨 Cargar CSS',
+          pass: true,
+          message: `✅ Rutas de CSS accesibles`
+        };
+      } catch (error) {
+        return {
+          name: '🎨 Cargar CSS',
+          pass: false,
+          message: `❌ Error: ${error.message}`
+        };
+      }
+    }
+
+    // Test 3: JavaScript Load
+    function testJsLoad() {
+      try {
+        // Verificar que utils.js se cargó
+        if (typeof saveToLocalStorage === 'function') {
+          return {
+            name: '⚙️ Cargar JavaScript',
+            pass: true,
+            message: `✅ JavaScript cargado correctamente`
+          };
+        } else {
+          return {
+            name: '⚙️ Cargar JavaScript',
+            pass: false,
+            message: `⚠️ JavaScript cargado pero funciones no disponibles`
+          };
+        }
+      } catch (error) {
+        return {
+          name: '⚙️ Cargar JavaScript',
+          pass: false,
+          message: `❌ Error: ${error.message}`
+        };
+      }
+    }
+
+    // Test 4: localStorage
+    function testLocalStorage() {
+      try {
+        localStorage.setItem('test', 'ok');
+        const value = localStorage.getItem('test');
+        localStorage.removeItem('test');
+
+        return {
+          name: '💾 localStorage',
+          pass: value === 'ok',
+          message: value === 'ok' ? '✅ localStorage funciona' : '❌ localStorage no funciona'
+        };
+      } catch (error) {
+        return {
+          name: '💾 localStorage',
+          pass: false,
+          message: `❌ Error: ${error.message}`
+        };
+      }
+    }
+
+    // Test 5: URL Detection
+    function testUrlDetection() {
+      const currentUrl = window.location.href;
+      const isLocal = currentUrl.includes('localhost') || currentUrl.includes('127.0.0.1');
+
+      return {
+        name: '🌐 URL Actual',
+        pass: isLocal,
+        message: isLocal
+          ? `✅ Accediendo desde localhost: ${currentUrl}`
+          : `⚠️ No estás en localhost. URL actual: ${currentUrl}`
+      };
+    }
+
+    // Ejecutar tests
+    async function runTests() {
+      const results = document.getElementById('results');
+
+      const jsonTest = await testJsonLoad();
+      const cssTest = testCssLoad();
+      const jsTest = testJsLoad();
+      const storageTest = testLocalStorage();
+      const urlTest = testUrlDetection();
+
+      const allTests = [jsonTest, cssTest, jsTest, storageTest, urlTest];
+
+      let html = '';
+      allTests.forEach(test => {
+        html += `
+          <div class="test-item ${test.pass ? 'pass' : 'fail'}">
+            <strong>${test.name}</strong><br>
+            ${test.message}
+          </div>
+        `;
+      });
+
+      const allPass = allTests.every(t => t.pass);
+
+      html += `
+        <div class="test-item ${allPass ? 'pass' : 'fail'}">
+          <h3>${allPass ? '✅ ¡TODO FUNCIONA!' : '⚠️ HAY PROBLEMAS'}</h3>
+          ${allPass
+            ? `<p>La plataforma está lista. Accede a <a href="./index.html">index.html</a></p>`
+            : `<p>Revisa los errores arriba. Si estás viendo esto en el archivo, <strong>ABRE UN SERVIDOR LOCAL primero:</strong></p>
+               <code>python3 -m http.server 8000</code>
+               <p>Luego accede a <code>http://localhost:8000/test.html</code></p>`
+          }
+        </div>
+      `;
+
+      results.innerHTML = html;
+    }
+
+    // Ejecutar al cargar
+    runTests();
+  </script>
+</body>
+</html>

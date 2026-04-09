@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Directorio completo de 200+ recursos para TEA: diagnóstico, educación, empleo, vivienda y ayudas. Buscador accesible, filtros por categoría y etiquetas. Especialmente diseñado para personas mayores.">
+  <meta name="keywords" content="TEA, autismo, recursos, diagnóstico, educación, empleo, Madrid, ayudas, accesible">
+  <meta name="author" content="Comunidad TEA">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <meta name="theme-color" content="#8B4513">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://guia-tea.netlify.app/">
+  <meta property="og:title" content="Guía de Recursos TEA - Directorio de Servicios para Autismo">
+  <meta property="og:description" content="200+ recursos verificados para la comunidad TEA: diagnóstico, educación, empleo, vivienda y ayudas. Buscador inteligente y accesible.">
+  <meta property="og:image" content="https://guia-tea.netlify.app/og-image.png">
+  <meta property="og:site_name" content="Guía de Recursos TEA">
+  <meta property="og:locale" content="es_ES">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://guia-tea.netlify.app/">
+  <meta property="twitter:title" content="Guía de Recursos TEA">
+  <meta property="twitter:description" content="200+ recursos para TEA con buscador inteligente y filtros accesibles.">
+  <meta property="twitter:image" content="https://guia-tea.netlify.app/og-image.png">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://guia-tea.netlify.app/">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+  <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📚</text></svg>">
+
+  <title>Guía de Recursos TEA - Directorio Completo de Servicios para Autismo</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <!-- Schema Markup JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Guía de Recursos TEA",
+    "description": "Directorio completo de recursos para la comunidad TEA",
+    "url": "https://guia-tea.netlify.app",
+    "inLanguage": "es",
+    "creator": {
+      "@type": "Organization",
+      "name": "Comunidad TEA"
+    },
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": "https://guia-tea.netlify.app/?search={search_term_string}"
+      },
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Guía de Recursos TEA",
+    "url": "https://guia-tea.netlify.app",
+    "description": "Plataforma de directorio de recursos para la comunidad con Trastorno del Espectro Autista",
+    "sameAs": [
+      "https://github.com"
+    ]
+  }
+  </script>
+</head>
+<body>
+  <div class="container-main">
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-content">
+        <div class="header-left">
+          <h1 class="logo">📚 Guía Completa de Recursos TEA</h1>
+          <p class="tagline">200+ Servicios, Educación, Empleo y Ayudas para Autismo</p>
+        </div>
+
+      </div>
+
+      <!-- SEARCH BAR -->
+      <div class="search-container">
+        <input
+          type="text"
+          id="searchInput"
+          class="search-input"
+          placeholder="Buscar recursos... (ej: diagnóstico, escuela, empleo)"
+          aria-label="Buscar recursos del directorio"
+        >
+        <div class="search-icon">🔍</div>
+      </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <div class="main-wrapper">
+      <!-- SIDEBAR FILTROS -->
+      <aside class="sidebar filters-panel">
+        <div class="filters-header">
+          <h2>Filtrar por</h2>
+          <button id="closeSidebar" class="close-sidebar" aria-label="Cerrar filtros" style="display:none;">✕</button>
+        </div>
+
+        <!-- FILTRO POR COLECCIONES (CATEGORÍAS) -->
+        <section class="filter-section">
+          <h3 class="filter-title">📂 Colecciones</h3>
+          <div class="categories-list" id="categoriesList">
+            <!-- Generado por JavaScript -->
+          </div>
+        </section>
+
+        <!-- FILTRO POR ETIQUETAS -->
+        <section class="filter-section">
+          <h3 class="filter-title">#️⃣ Etiquetas</h3>
+          <div class="tags-grid" id="tagsList">
+            <!-- Generado por JavaScript -->
+          </div>
+        </section>
+
+        <!-- BOTÓN LIMPIAR FILTROS -->
+        <button id="clearFiltersBtn" class="btn btn-secondary btn-full">
+          🔄 Limpiar Filtros
+        </button>
+      </aside>
+
+      <!-- RESULTADOS -->
+      <main class="main-content">
+        <div class="results-header">
+          <h2 id="resultsTitle">Recursos del Directorio</h2>
+          <span class="results-count">
+            <span id="resultCount">20</span> recursos
+          </span>
+        </div>
+
+        <!-- GRID DE TARJETAS -->
+        <div class="resources-grid" id="resourcesGrid">
+          <!-- Generado por JavaScript -->
+        </div>
+
+        <!-- ESTADO VACÍO -->
+        <div id="emptyState" class="empty-state" style="display:none;">
+          <div class="empty-icon">🔍</div>
+          <h3>No se encontraron recursos</h3>
+          <p>Intenta ajustar tu búsqueda o filtros</p>
+          <button id="resetBtn" class="btn btn-primary">Volver a ver todos</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>¿Falta algún recurso?</h4>
+          <p>Ayúdanos a crecer sugiriendo nuevos recursos</p>
+          <a id="proposeLink" href="#" class="btn btn-secondary">✏️ Proponer Recurso</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Información</h4>
+          <p>Esta guía es un compendio de recursos verificados para apoyar a la comunidad TEA</p>
+          <p class="footer-credit">Versión 1.0 • Última actualización: 2024</p>
+        </div>
+
+      </div>
+      <div class="footer-bottom">
+        <p>Guía de Recursos para el Ecosistema TEA • Diseñada con accesibilidad</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- MODAL PARA DETALLES (OPCIONAL) -->
+  <div id="detailsModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <button class="modal-close" aria-label="Cerrar">&times;</button>
+      <div id="modalBody">
+        <!-- Contenido generado por JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/utils.js"></script>
+  <script src="js/gamification.js"></script>
+  <script src="js/search.js"></script>
+  <script src="js/filter.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

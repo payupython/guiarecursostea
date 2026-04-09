@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🐛 Debug - Guía TEA</title>
+  <style>
+    body {
+      font-family: 'Courier New', monospace;
+      padding: 20px;
+      background: #D4C4B0;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .console {
+      background: #1e1e1e;
+      color: #00ff00;
+      padding: 20px;
+      border-radius: 8px;
+      font-size: 12px;
+      max-height: 600px;
+      overflow-y: auto;
+      margin: 20px 0;
+      border: 2px solid #8B4513;
+    }
+    .log-entry {
+      margin: 4px 0;
+      line-height: 1.4;
+    }
+    .error { color: #ff4444; }
+    .warn { color: #ffff00; }
+    .success { color: #44ff44; }
+    .info { color: #44ccff; }
+    h2 {
+      color: #8B4513;
+    }
+    .section {
+      background: white;
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 8px;
+      border-left: 4px solid #8B4513;
+    }
+    button {
+      background: #8B4513;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin: 5px;
+      font-size: 14px;
+    }
+    button:hover {
+      background: #CD853F;
+    }
+  </style>
+</head>
+<body>
+  <h1>🐛 Debug Console - Guía TEA</h1>
+
+  <div class="section">
+    <h2>📋 Herramientas</h2>
+    <button onclick="loadJson()">📂 Cargar JSON</button>
+    <button onclick="testRenderCard()">🎨 Test Renderizar Tarjeta</button>
+    <button onclick="testRenderGrid()">📊 Test Renderizar Grid</button>
+    <button onclick="clearLog()">🗑️ Limpiar Log</button>
+  </div>
+
+  <div class="console" id="console"></div>
+
+  <script>
+    const consoleEl = document.getElementById('console');
+    let jsonData = null;
+
+    function log(msg, type = 'info') {
+      const entry = document.createElement('div');
+      entry.className = `log-entry ${type}`;
+      entry.textContent = msg;
+      consoleEl.appendChild(entry);
+      consoleEl.scrollTop = consoleEl.scrollHeight;
+      console.log(msg);
+    }
+
+    function clearLog() {
+      consoleEl.innerHTML = '';
+      log('📋 Log limpiado', 'info');
+    }
+
+    async function loadJson() {
+      log('📥 Iniciando carga de JSON...', 'info');
+      try {
+        const response = await fetch('./data/resources.json');
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}`);
+        }
+        jsonData = await response.json();
+        log(`✅ JSON cargado exitosamente`, 'success');
+        log(`   - Recursos: ${jsonData.resources.length}`, 'success');
+        log(`   - Categorías: ${jsonData.categories.length}`, 'success');
+        log(`   - Tags: ${jsonData.tags.length}`, 'success');
+
+        if (jsonData.resources.length > 0) {
+          log(`\n🔍 Primer recurso:`, 'info');
+          const first = jsonData.resources[0];
+          log(`   ID: ${first.id}`, 'info');
+          log(`   Nombre: ${first.name}`, 'info');
+          log(`   Categoría: ${first.category}`, 'info');
+        }
+      } catch (error) {
+        log(`❌ Error cargando JSON: ${error.message}`, 'error');
+      }
+    }
+
+    function testRenderCard() {
+      if (!jsonData) {
+        log('⚠️ Primero carga el JSON', 'warn');
+        return;
+      }
+
+      log('🎨 Testeando renderización de tarjeta...', 'info');
+
+      try {
+        // Cargar utils para renderCard
+        const script = document.createElement('script');
+        script.src = './js/utils.js';
+        script.onload = () => {
+          const resource = jsonData.resources[0];
+          const html = renderCard(resource, jsonData.categories);
+          log(`✅ HTML generado: ${html.length} caracteres`, 'success');
+          log(`Primer 200 caracteres: ${html.substring(0, 200)}...`, 'info');
+        };
+        script.onerror = () => {
+          log('❌ No se pudo cargar utils.js', 'error');
+        };
+        document.head.appendChild(script);
+      } catch (error) {
+        log(`❌ Error: ${error.message}`, 'error');
+      }
+    }
+
+    function testRenderGrid() {
+      if (!jsonData) {
+        log('⚠️ Primero carga el JSON', 'warn');
+        return;
+      }
+
+      log('📊 Testeando renderización de grid...', 'info');
+      log(`Total de recursos a renderizar: ${jsonData.resources.length}`, 'info');
+
+      try {
+        if (typeof renderGrid !== 'function') {
+          log('⚠️ renderGrid no está disponible, cargando utils.js...', 'warn');
+          // Este es un fallback simple para testing
+          let html = '';
+          jsonData.resources.forEach((resource, index) => {
+            html += `<div style="border:1px solid #ccc; padding:10px; margin:5px;">
+              <strong>${resource.name}</strong> (${resource.category})
+            </div>`;
+          });
+          log(`✅ Grid HTML generado (fallback): ${html.length} caracteres`, 'success');
+          log(`Recursos renderizados: ${jsonData.resources.length}`, 'success');
+        }
+      } catch (error) {
+        log(`❌ Error: ${error.message}`, 'error');
+      }
+    }
+
+    // Auto-load on start
+    window.addEventListener('load', () => {
+      log('🚀 Debug console iniciado', 'info');
+      log('Selectores disponibles:📂 Cargar JSON | 🎨 Test Card | 📊 Test Grid', 'info');
+    });
+  </script>
+</body>
+</html>

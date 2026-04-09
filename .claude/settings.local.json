@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -m http.server 8000)",
+      "Bash(python3 -c \"import http.server, socketserver; PORT = 8000; Handler = http.server.SimpleHTTPRequestHandler; httpd = socketserver.TCPServer\\(\\('', PORT\\), Handler\\); print\\(f'Sirviendo en http://localhost:{PORT}'\\); httpd.serve_forever\\(\\)\")",
+      "Bash(curl -s http://localhost:8000/data/resources.json)",
+      "Bash(python3 -m json.tool)",
+      "Bash(chmod +x /Volumes/Datos/GuiaRecursosTEA/START_SERVER.sh)",
+      "Bash(grep -n \"markResourceAsVisited\" /Volumes/Datos/GuiaRecursosTEA/js/*.js)",
+      "Bash(git init:*)",
+      "Bash(git config:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

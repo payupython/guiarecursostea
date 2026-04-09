@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel Admin - Guía TEA</title>
+  <link rel="stylesheet" href="../css/styles.css">
+  <style>
+    .admin-container {
+      max-width: 1200px;
+      margin: var(--spacing-lg) auto;
+      padding: 0 var(--spacing-lg);
+    }
+
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--spacing-xl);
+      padding-bottom: var(--spacing-lg);
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .admin-header h1 {
+      color: var(--color-primary);
+      font-size: 28px;
+    }
+
+    .admin-nav {
+      display: flex;
+      gap: var(--spacing-md);
+    }
+
+    .admin-nav button {
+      padding: var(--spacing-md) var(--spacing-lg);
+      background-color: var(--color-primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .admin-nav button:hover {
+      background-color: var(--color-secondary);
+    }
+
+    .admin-nav button.active {
+      background-color: var(--color-accent);
+    }
+
+    .admin-section {
+      display: none;
+      background-color: white;
+      padding: var(--spacing-xl);
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .admin-section.active {
+      display: block;
+    }
+
+    .form-group {
+      margin-bottom: var(--spacing-lg);
+    }
+
+    .form-group label {
+      display: block;
+      font-weight: bold;
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-sm);
+      font-size: 14px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: var(--spacing-md);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-family: var(--font-secondary);
+      font-size: 14px;
+    }
+
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--color-primary);
+      box-shadow: 0 0 8px rgba(139, 69, 19, 0.2);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--spacing-lg);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-lg);
+    }
+
+    .btn-danger {
+      background-color: #D2691E;
+    }
+
+    .btn-danger:hover {
+      background-color: #8B4513;
+    }
+
+    .resource-list {
+      display: grid;
+      gap: var(--spacing-lg);
+    }
+
+    .resource-item {
+      border: 1px solid var(--border-light);
+      padding: var(--spacing-lg);
+      border-radius: 6px;
+      background-color: #fff5e6;
+    }
+
+    .resource-item h4 {
+      color: var(--color-primary);
+      margin-bottom: var(--spacing-md);
+    }
+
+    .resource-item-actions {
+      display: flex;
+      gap: var(--spacing-md);
+      margin-top: var(--spacing-md);
+    }
+
+    .resource-item-actions button {
+      padding: var(--spacing-sm) var(--spacing-md);
+      font-size: 12px;
+      cursor: pointer;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+    }
+
+    .login-form {
+      max-width: 400px;
+      margin: var(--spacing-xl) auto;
+      padding: var(--spacing-xl);
+      border: 2px solid var(--border-color);
+      border-radius: 8px;
+      background-color: white;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: var(--spacing-lg);
+      margin-bottom: var(--spacing-xl);
+    }
+
+    .stat-card {
+      background-color: #fff5e6;
+      padding: var(--spacing-lg);
+      border-radius: 6px;
+      text-align: center;
+      border: 1px solid var(--border-light);
+    }
+
+    .stat-number {
+      font-size: 32px;
+      font-weight: bold;
+      color: var(--color-primary);
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 12px;
+      margin-top: var(--spacing-sm);
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-nav {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .admin-nav button {
+        width: 100%;
+      }
+
+      .resource-item-actions {
+        flex-direction: column;
+      }
+
+      .resource-item-actions button {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container-main">
+    <header class="header">
+      <div class="header-content">
+        <h1 class="logo">🔐 Panel Admin</h1>
+        <a href="../index.html" class="btn btn-secondary">← Volver al directorio</a>
+      </div>
+    </header>
+
+    <div class="admin-container">
+      <!-- LOGIN -->
+      <div id="loginSection" class="login-form">
+        <h2 style="text-align: center; color: #8B4513; margin-bottom: 24px;">Acceso Admin</h2>
+        <div class="form-group">
+          <label for="adminPassword">Contraseña:</label>
+          <input
+            type="password"
+            id="adminPassword"
+            placeholder="Ingresa contraseña"
+            autocomplete="off"
+          >
+        </div>
+        <button id="loginBtn" class="btn btn-primary" style="width: 100%;">Entrar</button>
+      </div>
+
+      <!-- PANEL ADMIN (OCULTO INICIALMENTE) -->
+      <div id="adminPanel" style="display: none;">
+        <div class="admin-header">
+          <h1>🔧 Administración de Recursos</h1>
+          <div class="admin-nav">
+            <button class="admin-tab-btn active" data-tab="dashboard">📊 Dashboard</button>
+            <button class="admin-tab-btn" data-tab="create">➕ Nuevo</button>
+            <button class="admin-tab-btn" data-tab="list">📋 Listar</button>
+            <button class="admin-tab-btn" data-tab="import">⬆️ Importar</button>
+            <button class="admin-tab-btn" data-tab="logout" style="background-color: #D2691E;">🚪 Salir</button>
+          </div>
+        </div>
+
+        <!-- DASHBOARD -->
+        <div id="dashboard" class="admin-section active">
+          <h2>📊 Estadísticas</h2>
+          <div class="stats" id="statsContainer">
+            <!-- Generado por JavaScript -->
+          </div>
+          <div>
+            <h3 style="color: #8B4513; margin-bottom: var(--spacing-lg);">Acciones Rápidas</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--spacing-lg);">
+              <button id="exportBtn" class="btn btn-primary">📥 Exportar JSON</button>
+              <button id="backupBtn" class="btn btn-primary">💾 Crear Backup</button>
+              <button id="resetBtn" class="btn btn-danger">🔄 Resetear Progreso</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- CREAR NUEVO RECURSO -->
+        <div id="create" class="admin-section">
+          <h2>➕ Crear Nuevo Recurso</h2>
+          <form id="resourceForm">
+            <div class="form-group">
+              <label for="resourceName">Nombre del Recurso *</label>
+              <input type="text" id="resourceName" required>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="resourceCategory">Categoría *</label>
+                <select id="resourceCategory" required>
+                  <option value="">-- Seleccionar --</option>
+                  <option value="salud">Salud, Diagnóstico y Especialidades</option>
+                  <option value="educacion">Educación y Atención Temprana</option>
+                  <option value="entidades">Entidades y Apoyo Familiar</option>
+                  <option value="vida-adulta">Vida Adulta, Vivienda y Empleo</option>
+                  <option value="tramites">Trámites, Ayudas y Beneficios</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="resourceLocation">Ubicación</label>
+                <input type="text" id="resourceLocation" placeholder="Madrid">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="resourceDescription">Descripción</label>
+              <textarea id="resourceDescription" placeholder="Descripción detallada del recurso..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="resourceValueProp">Propuesta de Valor (Lo especial)</label>
+              <input type="text" id="resourceValueProp" placeholder="Qué lo diferencia...">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="resourceUrl">Sitio Web</label>
+                <input type="url" id="resourceUrl" placeholder="https://ejemplo.com">
+              </div>
+
+              <div class="form-group">
+                <label for="resourcePhone">Teléfono</label>
+                <input type="tel" id="resourcePhone" placeholder="+34 91 123 4567">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="resourceContact">Email</label>
+              <input type="email" id="resourceContact" placeholder="contacto@ejemplo.com">
+            </div>
+
+            <div class="form-group">
+              <label for="resourceType">Tipo</label>
+              <select id="resourceType">
+                <option value="publica">Pública</option>
+                <option value="privada">Privada</option>
+                <option value="asociacion">Asociación</option>
+                <option value="programa">Programa</option>
+              </select>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="resourceAgeRange">Rango de Edad</label>
+                <input type="text" id="resourceAgeRange" placeholder="0-6 años">
+              </div>
+
+              <div class="form-group">
+                <label for="resourceServices">Servicios (separados por coma)</label>
+                <input type="text" id="resourceServices" placeholder="Servicio 1, Servicio 2">
+              </div>
+            </div>
+
+            <div class="btn-group">
+              <button type="submit" class="btn btn-primary">💾 Guardar Recurso</button>
+              <button type="reset" class="btn btn-secondary">🔄 Limpiar</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- LISTAR Y EDITAR -->
+        <div id="list" class="admin-section">
+          <h2>📋 Recursos</h2>
+          <input
+            type="text"
+            id="searchAdminInput"
+            placeholder="🔍 Buscar recurso..."
+            style="
+              width: 100%;
+              padding: var(--spacing-md);
+              margin-bottom: var(--spacing-lg);
+              border: 1px solid var(--border-color);
+              border-radius: 6px;
+            "
+          >
+          <div class="resource-list" id="resourcesList">
+            <!-- Generado por JavaScript -->
+          </div>
+        </div>
+
+        <!-- IMPORTAR JSON -->
+        <div id="import" class="admin-section">
+          <h2>⬆️ Importar Base de Datos</h2>
+          <div class="form-group">
+            <label for="jsonImportFile">Seleccionar archivo JSON:</label>
+            <input
+              type="file"
+              id="jsonImportFile"
+              accept=".json"
+              style="padding: var(--spacing-md);"
+            >
+          </div>
+          <button id="importBtn" class="btn btn-primary">📤 Importar</button>
+          <p style="color: var(--text-secondary); margin-top: var(--spacing-lg); font-size: 12px;">
+            ⚠️ Advertencia: Esto reemplazará toda la base de datos actual. Haz un backup primero.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-bottom">
+        <p>Panel de Administración - Guía TEA</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="../js/utils.js"></script>
+  <script src="../js/admin.js"></script>
+</body>
+</html>

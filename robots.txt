@@ -1,0 +1,22 @@
+# Robots.txt para Guía de Recursos TEA
+
+# Permitir a todos los crawlers
+User-agent: *
+Allow: /
+Disallow: /pages/admin.html
+Disallow: /debug.html
+Disallow: /test.html
+Disallow: /*.json
+
+# Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Apunta al sitemap
+Sitemap: https://guia-tea.netlify.app/sitemap.xml
