@@ -76,6 +76,11 @@ function handleCategoryChange(e) {
     selectedCategories = selectedCategories.filter(id => id !== categoryId);
   }
 
+  pushEvent('filter_category', {
+    category_id: categoryId,
+    action: isChecked ? 'select' : 'deselect'
+  });
+
   applyAllFilters();
 }
 
@@ -120,6 +125,11 @@ function handleTagClick(e) {
     }
   }
 
+  pushEvent('filter_tag', {
+    tag_id: tagId,
+    action: isActive ? 'deselect' : 'select'
+  });
+
   applyAllFilters();
 }
 
@@ -150,6 +160,11 @@ function applyAllFilters() {
       grid.innerHTML = '';
       toggleEmptyState(true);
       updateResultsCount(0);
+      pushEvent('filter_no_results', {
+        categories: selectedCategories,
+        tags: selectedTags,
+        search_term: query
+      });
     } else {
       grid.innerHTML = renderGrid(results, categories);
       toggleEmptyState(false);

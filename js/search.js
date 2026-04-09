@@ -106,6 +106,9 @@ function initializeSearch(resources, categories) {
       updateSearchUrl(query);
       if (query.length >= 2) {
         pushSearchEvent(query, results.length);
+        if (results.length === 0) {
+          pushEvent('search_no_results', { search_term: query });
+        }
       }
     }, 300);
 

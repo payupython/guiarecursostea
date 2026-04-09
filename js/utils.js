@@ -212,6 +212,12 @@ Observaciones:
   return `mailto:${email}?subject=${subject}&body=${body}`;
 }
 
+// ENVIAR EVENTO AL DATALAYER
+function pushEvent(eventName, params = {}) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({ event: eventName, ...params });
+}
+
 // CAPITALIZAR TEXTO
 function capitalize(text) {
   if (!text) return '';

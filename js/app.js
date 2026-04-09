@@ -134,10 +134,12 @@ async function initializeApp() {
 function setupProposeLink() {
   const proposeLink = document.getElementById('proposeLink');
   if (proposeLink) {
-    // Email predeterminado - cambiar según necesidad
     const email = 'recursos.tea@example.com';
     proposeLink.href = generateProposeLink(email);
     proposeLink.setAttribute('aria-label', 'Proponer un nuevo recurso');
+    proposeLink.addEventListener('click', () => {
+      pushEvent('propose_resource');
+    });
   }
 }
 
@@ -183,6 +185,35 @@ function setupAdditionalListeners() {
       if (resource) {
         showResourceDetails(resource);
       }
+    }
+  });
+
+  // Rastrear clicks en enlaces de recursos
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (!link) return;
+
+    const href = link.href;
+    const resourceCard = link.closest('.resource-card');
+    const resourceName = resourceCard
+      ? resourceCard.querySelector('.card-title')?.textContent?.trim()
+      : null;
+
+    if (href.startsWith('tel:')) {
+      pushEvent('phone_click', {
+        phone_number: href.replace('tel:', ''),
+        resource_name: resourceName
+      });
+    } else if (href.startsWith('mailto:')) {
+      pushEvent('email_click', {
+        email_address: href.replace('mailto:', '').split('?')[0],
+        resource_name: resourceName
+      });
+    } else if (href.startsWith('http') && !href.includes(window.location.hostname)) {
+      pushEvent('resource_link_click', {
+        link_url: href,
+        resource_name: resourceName
+      });
     }
   });
 
@@ -329,6 +360,12 @@ function showResourceDetails(resource) {
 
   modalBody.innerHTML = html;
   modal.style.display = 'flex';
+
+  pushEvent('resource_detail_view', {
+    resource_id: resource.id,
+    resource_name: resource.name,
+    resource_category: resource.category
+  });
 }
 
 // MANEJO DE CAMBIO DE VENTANA
