@@ -1,0 +1,21 @@
+{
+  "mcpServers": {
+    "google-tag-manager": {
+      "command": "npx",
+      "args": ["-y", "@stape-io/google-tag-manager-mcp-server"],
+      "env": {
+        "GTM_ACCOUNT_ID": "6348931689",
+        "GTM_CONTAINER_ID": "248896780",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/Volumes/Datos/GuiaRecursosTEA/guiarecursostea-e2db1dd18ad9 copia.json"
+      }
+    },
+    "google-analytics": {
+      "command": "npx",
+      "args": ["-y", "@googleanalytics/mcp"],
+      "env": {
+        "GA4_PROPERTY_ID": "6348931689",
+        "GOOGLE_APPLICATION_CREDENTIALS": "/Volumes/Datos/GuiaRecursosTEA/guiarecursostea-e2db1dd18ad9 copia.json"
+      }
+    }
+  }
+}

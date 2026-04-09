@@ -25,6 +25,8 @@ build/
 .env
 .env.local
 credentials.json
+*.json.bak
+guiarecursostea-*.json
 
 # Cache
 .cache/
