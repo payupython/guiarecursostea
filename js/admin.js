@@ -2,19 +2,16 @@
    ADMIN - Panel de Administración
    ============================================ */
 
-const ADMIN_PASSWORD = 'admin'; // CAMBIAR EN PRODUCCIÓN
-const ADMIN_KEY = 'admin-logged-in';
-
 let adminResources = [];
 let resourcesData = null;
 
-// VERIFICAR AUTENTICACIÓN
+// VERIFICAR AUTENTICACIÓN (usa Netlify Identity)
 function checkAdminAuth() {
-  const isLoggedIn = loadFromLocalStorage(ADMIN_KEY);
+  const user = netlifyIdentity.currentUser();
   const loginSection = document.getElementById('loginSection');
   const adminPanel = document.getElementById('adminPanel');
 
-  if (isLoggedIn) {
+  if (user) {
     if (loginSection) loginSection.style.display = 'none';
     if (adminPanel) adminPanel.style.display = 'block';
     loadAdminResources();
@@ -25,33 +22,16 @@ function checkAdminAuth() {
   }
 }
 
-// MANEJAR LOGIN
-function setupLogin() {
-  const loginBtn = document.getElementById('loginBtn');
-  const passwordInput = document.getElementById('adminPassword');
+// Eventos de Netlify Identity
+netlifyIdentity.on('login', () => {
+  netlifyIdentity.close();
+  checkAdminAuth();
+  showNotification('✅ Bienvenido', 'success');
+});
 
-  if (loginBtn) {
-    loginBtn.addEventListener('click', () => {
-      const password = passwordInput.value;
-
-      if (password === ADMIN_PASSWORD) {
-        saveToLocalStorage(ADMIN_KEY, true);
-        passwordInput.value = '';
-        checkAdminAuth();
-        showNotification('✅ Bienvenido admin', 'success');
-      } else {
-        showNotification('❌ Contraseña incorrecta', 'error');
-        passwordInput.value = '';
-      }
-    });
-
-    passwordInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        loginBtn.click();
-      }
-    });
-  }
-}
+netlifyIdentity.on('logout', () => {
+  location.reload();
+});
 
 // CARGAR RECURSOS
 async function loadAdminResources() {
@@ -362,8 +342,7 @@ function setupAdminTabs() {
       const tabName = btn.dataset.tab;
 
       if (tabName === 'logout') {
-        localStorage.removeItem(ADMIN_KEY);
-        location.reload();
+        netlifyIdentity.logout();
         return;
       }
 
@@ -394,12 +373,8 @@ function initializeAdminFunctionality() {
 
 // INICIAR CUANDO CARGUE
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    setupLogin();
-    checkAdminAuth();
-  });
+  document.addEventListener('DOMContentLoaded', checkAdminAuth);
 } else {
-  setupLogin();
   checkAdminAuth();
 }
 
