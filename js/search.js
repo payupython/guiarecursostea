@@ -38,9 +38,7 @@ function searchResources(query, resources) {
 // APLICAR BÚSQUEDA Y RENDERIZAR RESULTADOS
 function applySearch(query, resources = allResources, categories = []) {
   const results = searchResources(query, resources);
-
   renderSearchResults(results, categories);
-
   return results;
 }
 
@@ -60,6 +58,27 @@ function renderSearchResults(results, categories = []) {
   }
 }
 
+// ACTUALIZAR URL CON PARÁMETRO DE BÚSQUEDA (para GA4 Site Search)
+function updateSearchUrl(query) {
+  const url = new URL(window.location);
+  if (query) {
+    url.searchParams.set('q', query);
+  } else {
+    url.searchParams.delete('q');
+  }
+  history.replaceState(null, '', url);
+}
+
+// ENVIAR EVENTO AL DATALAYER (para GTM/GA4)
+function pushSearchEvent(query, resultCount) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: 'search',
+    search_term: query,
+    search_results_count: resultCount
+  });
+}
+
 // INICIALIZAR BÚSQUEDA
 function initializeSearch(resources, categories) {
   console.log('🔧 Inicializando búsqueda con', resources?.length, 'recursos');
@@ -70,12 +89,24 @@ function initializeSearch(resources, categories) {
 
   const searchInput = document.getElementById('searchInput');
 
+  // Restaurar búsqueda desde URL si existe
+  const initialQuery = getUrlParam('q');
+  if (initialQuery && searchInput) {
+    searchInput.value = initialQuery;
+    applySearch(initialQuery, resources, categories);
+  }
+
   if (searchInput) {
     // Debounced search function
     const debouncedSearch = debounce(() => {
-      const query = searchInput.value;
+      const query = searchInput.value.trim();
       const resourcesSource = window.allResources || resources || [];
-      applySearch(query, resourcesSource, categories);
+      const results = applySearch(query, resourcesSource, categories);
+
+      updateSearchUrl(query);
+      if (query.length >= 2) {
+        pushSearchEvent(query, results.length);
+      }
     }, 300);
 
     searchInput.addEventListener('input', debouncedSearch);
