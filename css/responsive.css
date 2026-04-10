@@ -97,7 +97,11 @@
   }
 
   .close-sidebar {
-    display: block !important;
+    display: none;
+  }
+
+  .sidebar.active .close-sidebar {
+    display: block;
   }
 
   .filters-header {
