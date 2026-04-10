@@ -30,8 +30,20 @@ function debounce(fn, delay = 300) {
   };
 }
 
+// Obtener tipo de Schema.org según categoría
+function getSchemaTypeForCategory(categoryId) {
+  const schemaMap = {
+    'salud': 'https://schema.org/MedicalBusiness',
+    'educacion': 'https://schema.org/EducationalOrganization',
+    'entidades': 'https://schema.org/Organization',
+    'vida-adulta': 'https://schema.org/LocalBusiness',
+    'tramites': 'https://schema.org/GovernmentOffice'
+  };
+  return schemaMap[categoryId] || 'https://schema.org/LocalBusiness';
+}
+
 // RENDERIZAR TARJETA
-function renderCard(resource, categories = []) {
+function renderCard(resource, categories = [], position = 1) {
   const category = categories.find(cat => cat.id === resource.category) || {};
   const categoryIcon = getCategoryIcon(resource.category);
 
@@ -49,15 +61,19 @@ function renderCard(resource, categories = []) {
     resource.contact ? `<li class="contact-item"><a href="mailto:${resource.contact}" title="Enviar email">✉️ ${resource.contact}</a></li>` : ''
   ].filter(html => html).join('');
 
+  // Determinar tipo de schema según categoría
+  const schemaType = getSchemaTypeForCategory(resource.category);
+
   const html = `
     <article class="resource-card"
       data-resource-id="${resource.id}"
       data-resource-name="${escapeHtml(resource.name)}"
       data-category="${resource.category}"
       data-category-name="${category.name || 'Sin categoría'}"
+      data-position="${position}"
       ${resource.tags ? `data-tags="${resource.tags.join(',')}"` : ''}
       itemscope
-      itemtype="https://schema.org/LocalBusiness">
+      itemtype="${schemaType}">
 
       <header class="card-header">
         <span class="card-icon" aria-hidden="true">${categoryIcon}</span>
@@ -68,7 +84,9 @@ function renderCard(resource, categories = []) {
       ${resource.location ? `
         <section class="card-section">
           <h4>📍 Ubicación</h4>
-          <address itemprop="address">${escapeHtml(resource.location)}</address>
+          <address itemprop="areaServed" itemscope itemtype="https://schema.org/Place">
+            <span itemprop="name">${escapeHtml(resource.location)}</span>
+          </address>
         </section>
       ` : ''}
 
@@ -130,9 +148,41 @@ function renderGrid(resources, categories = []) {
     return '';
   }
 
-  return resources
-    .map(resource => renderCard(resource, categories))
+  const cards = resources
+    .map((resource, index) => renderCard(resource, categories, index + 1))
     .join('');
+
+  // Actualizar JSON-LD del ItemList
+  updateItemListSchema(resources);
+
+  return cards;
+}
+
+// Actualizar Schema ItemList con recursos reales
+function updateItemListSchema(resources) {
+  const itemListElement = resources.map((resource, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "url": `https://guia-tea.netlify.app/?resource=${resource.id}`,
+    "name": resource.name
+  }));
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": itemListElement,
+    "numberOfItems": resources.length
+  };
+
+  // Buscar o crear script de Schema para ItemList
+  let schemaScript = document.querySelector('script[data-schema="itemlist"]');
+  if (!schemaScript) {
+    schemaScript = document.createElement('script');
+    schemaScript.type = 'application/ld+json';
+    schemaScript.setAttribute('data-schema', 'itemlist');
+    document.head.appendChild(schemaScript);
+  }
+  schemaScript.textContent = JSON.stringify(schema);
 }
 
 // ICONOS POR CATEGORÍA

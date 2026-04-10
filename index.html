@@ -48,39 +48,59 @@
   <link rel="stylesheet" href="css/responsive.css">
 
   <!-- Schema Markup JSON-LD -->
+
+  <!-- Página como Guide -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "Guía de Recursos TEA",
-    "description": "Directorio completo de recursos para la comunidad TEA",
+    "@type": "Guide",
+    "name": "Diagnóstico de TEA: Guía Completa de Recursos y Apoyo para Padres",
+    "description": "Guía definitiva con 200+ recursos verificados para padres tras diagnóstico de TEA",
     "url": "https://guia-tea.netlify.app",
     "inLanguage": "es",
-    "creator": {
+    "author": {
       "@type": "Organization",
       "name": "Comunidad TEA"
     },
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": {
-        "@type": "EntryPoint",
-        "urlTemplate": "https://guia-tea.netlify.app/?search={search_term_string}"
-      },
-      "query-input": "required name=search_term_string"
+    "hasPart": [
+      {
+        "@type": "WebPageElement",
+        "name": "Directorio de Recursos"
+      }
+    ]
+  }
+  </script>
+
+  <!-- ItemList de Recursos -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Directorio de Recursos TEA",
+    "description": "200+ recursos verificados para TEA",
+    "url": "https://guia-tea.netlify.app",
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [],
+      "numberOfItems": 200
     }
   }
   </script>
 
+  <!-- Organización -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Guía de Recursos TEA",
     "url": "https://guia-tea.netlify.app",
-    "description": "Plataforma de directorio de recursos para la comunidad con Trastorno del Espectro Autista",
-    "sameAs": [
-      "https://github.com"
-    ]
+    "description": "Plataforma especializada en recursos para la comunidad con Trastorno del Espectro Autista",
+    "inLanguage": "es",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "Propuesta de Recursos",
+      "url": "https://guia-tea.netlify.app"
+    }
   }
   </script>
 </head>
