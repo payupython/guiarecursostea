@@ -91,100 +91,100 @@
   <!-- End Google Tag Manager (noscript) -->
   <div class="container-main">
     <!-- HEADER -->
-    <header class="header">
-      <div class="header-content">
+    <header class="header" role="banner">
+      <nav class="header-content" role="navigation" aria-label="Navegación principal">
         <div class="header-left">
-          <h1 class="logo">📚 Diagnóstico de TEA: Guía Completa de Recursos y Apoyo para Padres</h1>
-          <p class="tagline">200+ Servicios, Educación, Empleo y Ayudas para Autismo</p>
+          <h1 class="logo" data-section="site-title">📚 Diagnóstico de TEA: Guía Completa de Recursos y Apoyo para Padres</h1>
+          <p class="tagline" data-section="site-description">200+ Servicios, Educación, Empleo y Ayudas para Autismo</p>
         </div>
-
-      </div>
+      </nav>
 
       <!-- SEARCH BAR -->
-      <div class="search-container">
+      <section class="search-container" data-section="search" role="search">
         <input
           type="text"
           id="searchInput"
           class="search-input"
           placeholder="Buscar recursos... (ej: diagnóstico, escuela, empleo)"
           aria-label="Buscar recursos del directorio"
+          data-input="search-query"
         >
-        <div class="search-icon">🔍</div>
-      </div>
+        <div class="search-icon" aria-hidden="true">🔍</div>
+      </section>
     </header>
 
     <!-- MAIN CONTENT -->
     <div class="main-wrapper">
-      <!-- SIDEBAR FILTROS -->
-      <aside class="sidebar filters-panel">
+      <!-- NAVIGATION - SIDEBAR FILTROS -->
+      <nav class="sidebar filters-panel" role="navigation" aria-label="Filtros de búsqueda">
         <div class="filters-header">
           <h2>Filtrar por</h2>
           <button id="closeSidebar" class="close-sidebar" aria-label="Cerrar filtros" style="display:none;">✕</button>
         </div>
 
         <!-- FILTRO POR COLECCIONES (CATEGORÍAS) -->
-        <section class="filter-section">
+        <section class="filter-section" data-filter-type="categories">
           <h3 class="filter-title">📂 Colecciones</h3>
-          <div class="categories-list" id="categoriesList">
+          <div class="categories-list" id="categoriesList" role="group" aria-label="Filtrar por categoría">
             <!-- Generado por JavaScript -->
           </div>
         </section>
 
         <!-- FILTRO POR ETIQUETAS -->
-        <section class="filter-section">
+        <section class="filter-section" data-filter-type="tags">
           <h3 class="filter-title">#️⃣ Etiquetas</h3>
-          <div class="tags-grid" id="tagsList">
+          <div class="tags-grid" id="tagsList" role="group" aria-label="Filtrar por etiqueta">
             <!-- Generado por JavaScript -->
           </div>
         </section>
 
         <!-- BOTÓN LIMPIAR FILTROS -->
-        <button id="clearFiltersBtn" class="btn btn-secondary btn-full">
+        <button id="clearFiltersBtn" class="btn btn-secondary btn-full" data-action="clear-filters">
           🔄 Limpiar Filtros
         </button>
-      </aside>
+      </nav>
 
       <!-- RESULTADOS -->
-      <main class="main-content">
-        <div class="results-header">
+      <main class="main-content" role="main">
+        <section class="results-header" data-section="results">
           <h2 id="resultsTitle">Recursos del Directorio</h2>
-          <span class="results-count">
+          <span class="results-count" data-metric="resource-count">
             <span id="resultCount">20</span> recursos
           </span>
-        </div>
+        </section>
 
-        <!-- GRID DE TARJETAS -->
-        <div class="resources-grid" id="resourcesGrid">
+        <!-- GRID DE ARTÍCULOS/RECURSOS -->
+        <section class="resources-grid" id="resourcesGrid" data-grid="resources" role="region" aria-live="polite" aria-label="Lista de recursos">
           <!-- Generado por JavaScript -->
-        </div>
+        </section>
 
         <!-- ESTADO VACÍO -->
-        <div id="emptyState" class="empty-state" style="display:none;">
+        <section id="emptyState" class="empty-state" style="display:none;" data-state="empty-results">
           <div class="empty-icon">🔍</div>
           <h3>No se encontraron recursos</h3>
           <p>Intenta ajustar tu búsqueda o filtros</p>
-          <button id="resetBtn" class="btn btn-primary">Volver a ver todos</button>
-        </div>
+          <button id="resetBtn" class="btn btn-primary" data-action="reset">Volver a ver todos</button>
+        </section>
       </main>
     </div>
 
     <!-- FOOTER -->
-    <footer class="footer">
+    <footer class="footer" role="contentinfo" data-section="footer">
       <div class="footer-content">
-        <div class="footer-section">
+        <section class="footer-section" data-footer-section="contribute">
           <h4>¿Falta algún recurso?</h4>
           <p>Ayúdanos a crecer sugiriendo nuevos recursos</p>
-          <a id="proposeLink" href="#" class="btn btn-secondary">✏️ Proponer Recurso</a>
-        </div>
+          <a id="proposeLink" href="#" class="btn btn-secondary" data-action="propose-resource">✏️ Proponer Recurso</a>
+        </section>
 
-        <div class="footer-section">
+        <section class="footer-section" data-footer-section="info">
           <h4>Información</h4>
           <p>Esta guía es un compendio de recursos verificados para apoyar a la comunidad TEA</p>
-          <p class="footer-credit">Versión 1.0 • Última actualización: 2024</p>
-        </div>
+          <p class="footer-credit" data-meta="version">Versión 1.0 • Última actualización: 2024</p>
+        </section>
 
       </div>
-      <div class="footer-bottom">
+      <div class="footer-bottom" data-footer-section="copyright">
         <p>Guía de Recursos para el Ecosistema TEA • Diseñada con accesibilidad</p>
       </div>
     </footer>

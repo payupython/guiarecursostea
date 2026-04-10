@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Test - Filtros con URL</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+    .test-section {
+      margin: 30px 0;
+      padding: 20px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+    }
+    .test-link {
+      display: inline-block;
+      margin: 10px 10px 10px 0;
+      padding: 10px 15px;
+      background-color: #8B4513;
+      color: white;
+      text-decoration: none;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .test-link:hover {
+      background-color: #5C4033;
+    }
+    code {
+      background-color: #f4f4f4;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: monospace;
+    }
+    .result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-left: 4px solid #8B4513;
+    }
+    h1 {
+      color: #8B4513;
+    }
+    h2 {
+      color: #5C4033;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧪 Test de Filtros con URLs Rastreables</h1>
+
+  <div class="test-section">
+    <h2>📝 Test 1: Filtrar por Categoría</h2>
+    <p>Haz clic en los enlaces para probar que los filtros se aplican automáticamente:</p>
+
+    <a href="?categories=salud" class="test-link">📂 Filtro: Salud</a>
+    <a href="?categories=educacion" class="test-link">📂 Filtro: Educación</a>
+    <a href="?categories=salud,educacion" class="test-link">📂 Filtro: Salud + Educación</a>
+
+    <div class="result">
+      <strong>✅ Esperado:</strong> La página debe cargarse con los filtros de categoría aplicados automáticamente
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>#️⃣ Test 2: Filtrar por Tags</h2>
+
+    <a href="?tags=diagnostico" class="test-link">🏷️ Filtro: #Diagnóstico</a>
+    <a href="?tags=online" class="test-link">🏷️ Filtro: #Online</a>
+    <a href="?tags=diagnostico,online" class="test-link">🏷️ Filtro: #Diagnóstico + #Online</a>
+
+    <div class="result">
+      <strong>✅ Esperado:</strong> La página carga con los filtros de tags seleccionados
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>🔍 Test 3: Búsqueda + Filtros</h2>
+
+    <a href="?q=diagnóstico&categories=salud" class="test-link">🔍 Búsqueda + Categoría</a>
+    <a href="?q=escuela&categories=educacion&tags=online" class="test-link">🔍 Búsqueda + Múltiples Filtros</a>
+
+    <div class="result">
+      <strong>✅ Esperado:</strong> La página carga con la búsqueda y filtros combinados
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>✅ Test 4: URLs Compartibles</h2>
+
+    <p>Copia cualquiera de estos enlaces y comparte con alguien más. Los filtros deben aplicarse automáticamente:</p>
+
+    <code style="display: block; padding: 10px; margin: 10px 0; background-color: #fff5e6;">
+      http://localhost:8000/?categories=salud&tags=diagnostico
+    </code>
+
+    <code style="display: block; padding: 10px; margin: 10px 0; background-color: #fff5e6;">
+      http://localhost:8000/?q=recurso&categories=educacion
+    </code>
+
+    <div class="result">
+      <strong>✅ Verificación:</strong> Copia la URL, cierra la pestaña, abre la URL nuevamente y verifica que los filtros se mantienen
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>📊 Test 5: Verificar Console Logs</h2>
+
+    <p>Abre la consola del navegador (F12 o Cmd+Option+I) y busca mensajes como:</p>
+
+    <code style="display: block; padding: 10px; margin: 10px 0; background-color: #fff5e6;">
+      📂 Categorías desde URL: ["salud"]
+    </code>
+    <code style="display: block; padding: 10px; margin: 10px 0; background-color: #fff5e6;">
+      #️⃣ Tags desde URL: ["diagnostico"]
+    </code>
+    <code style="display: block; padding: 10px; margin: 10px 0; background-color: #fff5e6;">
+      🔗 URL actualizada: ?categories=salud&tags=diagnostico
+    </code>
+
+    <div class="result">
+      <strong>✅ Verificación:</strong> Si ves estos mensajes, los parámetros se están leyendo correctamente
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>🌐 Test 6: Para Google (SEO)</h2>
+
+    <p>Google ahora puede rastear estas URLs como páginas separadas:</p>
+
+    <ul>
+      <li><code>/?categories=salud</code> → Página de Recursos de Salud</li>
+      <li><code>/?categories=educacion&tags=online</code> → Página de Educación Online</li>
+      <li><code>/?q=diagnóstico</code> → Página de Búsqueda de Diagnóstico</li>
+    </ul>
+
+    <div class="result">
+      <strong>✅ Beneficio:</strong> Cada URL filtrada indexada = mejor SEO y más tráfico orgánico
+    </div>
+  </div>
+
+  <div class="test-section" style="background-color: #fff5e6; border-color: #8B4513;">
+    <h2>🎯 Resumen de Beneficios</h2>
+
+    <ul>
+      <li>✅ URLs compartibles con filtros aplicados</li>
+      <li>✅ Google rastrea cada combinación de filtros</li>
+      <li>✅ Historial de navegación funciona correctamente</li>
+      <li>✅ Filtros persistentes en URLs</li>
+      <li>✅ Mejor experiencia de usuario (copiar/compartir URLs)</li>
+      <li>✅ Mejora en SEO y visibilidad</li>
+    </ul>
+
+    <p style="margin-top: 20px;">
+      <a href="/" class="test-link">← Volver a la aplicación principal</a>
+    </p>
+  </div>
+
+</body>
+</html>

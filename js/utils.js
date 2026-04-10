@@ -50,59 +50,69 @@ function renderCard(resource, categories = []) {
   ].filter(html => html).join('');
 
   const html = `
-    <div class="resource-card" data-resource-id="${resource.id}" itemscope itemtype="https://schema.org/LocalBusiness">
-      <div class="card-header">
-        <div class="card-icon">${categoryIcon}</div>
-        <h3 class="card-title" itemprop="name">${escapeHtml(resource.name)}</h3>
-      </div>
+    <article class="resource-card"
+      data-resource-id="${resource.id}"
+      data-resource-name="${escapeHtml(resource.name)}"
+      data-category="${resource.category}"
+      data-category-name="${category.name || 'Sin categoría'}"
+      data-type="resource"
+      ${resource.tags ? `data-tags="${resource.tags.join(',')}"` : ''}
+      itemscope
+      itemtype="https://schema.org/LocalBusiness"
+      role="article">
 
-      <span class="card-category">${category.name || 'Sin categoría'}</span>
+      <header class="card-header" data-section="header">
+        <div class="card-icon" aria-hidden="true">${categoryIcon}</div>
+        <h3 class="card-title" itemprop="name" data-field="name">${escapeHtml(resource.name)}</h3>
+      </header>
+
+      <span class="card-category" data-field="category" data-category-id="${resource.category}">${category.name || 'Sin categoría'}</span>
 
       ${resource.location ? `
-        <div class="card-section">
-          <div class="card-section-title">📍 Ubicación</div>
-          <div class="card-section-content">${escapeHtml(resource.location)}</div>
-        </div>
+        <section class="card-section" data-section="location">
+          <h4 class="card-section-title">📍 Ubicación</h4>
+          <div class="card-section-content" itemprop="address" data-field="location">${escapeHtml(resource.location)}</div>
+        </section>
       ` : ''}
 
-      <div class="card-divider"></div>
+      <div class="card-divider" aria-hidden="true"></div>
 
       ${resource.uniqueValueProp ? `
-        <div class="card-section">
-          <div class="card-section-title">✨ Lo especial</div>
-          <div class="card-section-content">${escapeHtml(resource.uniqueValueProp)}</div>
-        </div>
+        <section class="card-section" data-section="value-prop">
+          <h4 class="card-section-title">✨ Lo especial</h4>
+          <div class="card-section-content" data-field="unique-value">${escapeHtml(resource.uniqueValueProp)}</div>
+        </section>
       ` : ''}
 
       ${resource.description ? `
-        <div class="card-section">
-          <div class="card-section-title">📝 Descripción</div>
-          <div class="card-section-content">${escapeHtml(resource.description)}</div>
-        </div>
+        <section class="card-section" data-section="description">
+          <h4 class="card-section-title">📝 Descripción</h4>
+          <div class="card-section-content" itemprop="description" data-field="description">${escapeHtml(resource.description)}</div>
+        </section>
       ` : ''}
 
       ${servicesHTML ? `
-        <div class="card-section">
-          <div class="card-section-title">🎯 Servicios</div>
-          <div class="card-services">${servicesHTML}</div>
-        </div>
+        <section class="card-section" data-section="services">
+          <h4 class="card-section-title">🎯 Servicios</h4>
+          <div class="card-services" role="list" data-field="services">${servicesHTML}</div>
+        </section>
       ` : ''}
 
       ${resource.ageRange ? `
-        <div class="card-section">
-          <div class="card-section-content"><strong>Edad:</strong> ${escapeHtml(resource.ageRange)}</div>
-        </div>
+        <section class="card-section" data-section="age-range">
+          <div class="card-section-content"><strong>Edad:</strong> <span data-field="age-range" itemprop="targetGroup">${escapeHtml(resource.ageRange)}</span></div>
+        </section>
       ` : ''}
 
       ${contactsHTML ? `
-        <div class="card-divider"></div>
-        <div class="card-contact">${contactsHTML}</div>
+        <div class="card-divider" aria-hidden="true"></div>
+        <section class="card-contact" data-section="contact" role="region" aria-label="Información de contacto">${contactsHTML}</section>
       ` : ''}
 
       ${tagsHTML ? `
-        <div class="card-tags">${tagsHTML}</div>
+        <footer class="card-tags" data-section="tags" role="list">${tagsHTML}</footer>
       ` : ''}
-    </div>
+    </article>
   `;
 
   return html;
