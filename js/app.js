@@ -102,6 +102,25 @@ async function initializeApp() {
 
   // Gamificación desactivada
 
+  // Inicializar ciudades
+  try {
+    await initializeCities();
+    console.log('✅ Ciudades inicializadas');
+
+    // Renderizar selector de ciudades
+    const citySelector = window.renderCitySelector?.();
+    if (citySelector) {
+      const container = document.getElementById('citySelectorContainer');
+      if (container) {
+        container.innerHTML = '';
+        container.appendChild(citySelector);
+        container.style.display = 'block';
+      }
+    }
+  } catch (error) {
+    console.error('⚠️ Error en ciudades:', error);
+  }
+
   // Inicializar búsqueda
   try {
     initializeSearch(appData.resources, appData.categories);

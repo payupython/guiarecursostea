@@ -1,0 +1,116 @@
+{
+  "cities": [
+    {
+      "id": "madrid",
+      "name": "Madrid",
+      "slug": "madrid",
+      "description": "Recursos TEA en Madrid: servicios de diagnóstico, educación especializada, apoyo familiar y trámites administrativos",
+      "keywords": ["TEA Madrid", "autismo Madrid", "recursos diagnóstico Madrid"],
+      "region": "Comunidad de Madrid",
+      "coordinates": {
+        "latitude": 40.4168,
+        "longitude": -3.7038
+      },
+      "population": "3.3M",
+      "featured": true
+    },
+    {
+      "id": "barcelona",
+      "name": "Barcelona",
+      "slug": "barcelona",
+      "description": "Recursos TEA en Barcelona: centros de diagnóstico, escuelas especializadas, terapias y asociaciones de apoyo",
+      "keywords": ["TEA Barcelona", "autismo Barcelona", "recursos diagnóstico Barcelona"],
+      "region": "Cataluña",
+      "coordinates": {
+        "latitude": 41.3851,
+        "longitude": 2.1734
+      },
+      "population": "1.6M",
+      "featured": true
+    },
+    {
+      "id": "valencia",
+      "name": "Valencia",
+      "slug": "valencia",
+      "description": "Directorio de recursos TEA en Valencia: diagnóstico, educación, empleo y servicios de apoyo familiar",
+      "keywords": ["TEA Valencia", "autismo Valencia", "recursos Valencia"],
+      "region": "Comunidad Valenciana",
+      "coordinates": {
+        "latitude": 39.4699,
+        "longitude": -0.3763
+      },
+      "population": "800K",
+      "featured": false
+    },
+    {
+      "id": "bilbao",
+      "name": "Bilbao",
+      "slug": "bilbao",
+      "description": "Recursos TEA en Bilbao y País Vasco: servicios especializados, educación y apoyo comunitario",
+      "keywords": ["TEA Bilbao", "autismo País Vasco", "recursos Bilbao"],
+      "region": "País Vasco",
+      "coordinates": {
+        "latitude": 43.2633,
+        "longitude": -2.9349
+      },
+      "population": "350K",
+      "featured": false
+    },
+    {
+      "id": "sevilla",
+      "name": "Sevilla",
+      "slug": "sevilla",
+      "description": "Guía de recursos TEA en Sevilla: diagnóstico, educación especializada y servicios de apoyo",
+      "keywords": ["TEA Sevilla", "autismo Sevilla", "recursos diagnóstico Sevilla"],
+      "region": "Andalucía",
+      "coordinates": {
+        "latitude": 37.3886,
+        "longitude": -5.9823
+      },
+      "population": "700K",
+      "featured": false
+    },
+    {
+      "id": "malaga",
+      "name": "Málaga",
+      "slug": "malaga",
+      "description": "Recursos TEA en Málaga: servicios de salud, educación y apoyo para familias con diagnóstico de autismo",
+      "keywords": ["TEA Málaga", "autismo Málaga", "recursos Málaga"],
+      "region": "Andalucía",
+      "coordinates": {
+        "latitude": 36.7213,
+        "longitude": -4.4214
+      },
+      "population": "580K",
+      "featured": false
+    },
+    {
+      "id": "zaragoza",
+      "name": "Zaragoza",
+      "slug": "zaragoza",
+      "description": "Directorio de recursos TEA en Zaragoza: diagnóstico, educación y servicios comunitarios",
+      "keywords": ["TEA Zaragoza", "autismo Zaragoza", "recursos Zaragoza"],
+      "region": "Aragón",
+      "coordinates": {
+        "latitude": 41.6561,
+        "longitude": -0.8773
+      },
+      "population": "680K",
+      "featured": false
+    },
+    {
+      "id": "espana",
+      "name": "España (Nacional)",
+      "slug": "espana",
+      "description": "Recursos TEA a nivel nacional: servicios en línea, trámites administrativos, y apoyo telemático para toda España",
+      "keywords": ["TEA España", "autismo España", "recursos nacionales TEA"],
+      "region": "España",
+      "coordinates": {
+        "latitude": 40.0,
+        "longitude": -3.0
+      },
+      "population": "47M",
+      "featured": true
+    }
+  ]
+}

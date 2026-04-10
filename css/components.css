@@ -247,6 +247,103 @@ html {
   top: 0;
 }
 
+/* CITY SELECTOR */
+.city-selector {
+  margin: 20px 0;
+  padding: 16px;
+  background-color: #fff5e6;
+  border: 1px solid #D4C4B0;
+  border-radius: 6px;
+}
+
+.city-selector-header {
+  margin-bottom: 12px;
+}
+
+.city-selector-header h3 {
+  margin: 0;
+  color: #8B4513;
+  font-size: 16px;
+}
+
+.city-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.city-link {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #fff;
+  color: #8B4513;
+  text-decoration: none;
+  border: 1px solid #8B4513;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s ease;
+}
+
+.city-link:hover {
+  background-color: #8B4513;
+  color: white;
+}
+
+.city-link:focus-visible {
+  outline: 2px solid #8B4513;
+  outline-offset: 2px;
+}
+
+.city-dropdown {
+  cursor: pointer;
+  user-select: none;
+}
+
+.city-dropdown summary {
+  padding: 8px 16px;
+  background-color: #fff;
+  color: #8B4513;
+  border: 1px solid #8B4513;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 500;
+  list-style: none;
+}
+
+.city-dropdown summary:hover {
+  background-color: #f0e6d2;
+}
+
+.city-dropdown ul {
+  list-style: none;
+  padding: 8px 0 0 0;
+  margin: 8px 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.city-dropdown a {
+  display: inline-block;
+  padding: 8px 12px;
+  background-color: #fff;
+  color: #8B4513;
+  text-decoration: none;
+  border: 1px solid #D4C4B0;
+  border-radius: 4px;
+  font-size: 13px;
+  transition: all 0.2s ease;
+}
+
+.city-dropdown a:hover {
+  background-color: #8B4513;
+  color: white;
+}
+
 /* BREADCRUMB NAVIGATION */
 .breadcrumb-nav {
   padding: 12px 20px;
