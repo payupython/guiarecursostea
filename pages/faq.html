@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Preguntas frecuentes sobre la Guía de Recursos TEA y cómo usar la plataforma">
+  <meta name="keywords" content="FAQ, preguntas frecuentes, TEA, autismo, guía, recursos">
+  <title>Preguntas Frecuentes - Guía de Recursos TEA</title>
+  <link rel="canonical" href="https://guia-tea.netlify.app/pages/faq.html">
+
+  <link rel="stylesheet" href="../css/styles.css">
+  <link rel="stylesheet" href="../css/components.css">
+  <link rel="stylesheet" href="../css/responsive.css">
+
+  <!-- FAQPage Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué es el TEA (Trastorno del Espectro Autista)?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El TEA es una condición del neurodesarrollo caracterizada por dificultades en la comunicación social, patrones de comportamiento repetitivos e intereses restringidos. Se considera un espectro porque las características varían significativamente entre individuos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo usar esta guía de recursos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Puedes buscar recursos usando la barra de búsqueda, filtrar por categorías (Salud, Educación, Entidades, etc.) y por etiquetas específicas. Los resultados se actualizan en tiempo real según tus criterios de búsqueda."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Dónde puedo proponer nuevos recursos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Puedes proponer nuevos recursos a través del botón 'Proponer Recurso' en el pie de página. Nos ayuda a mantener la guía actualizada con opciones relevantes para la comunidad TEA."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué categorías de recursos están disponibles?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Contamos con 5 categorías principales: Salud y Diagnóstico, Educación y Atención Temprana, Entidades y Apoyo Familiar, Vida Adulta/Vivienda/Empleo, y Trámites/Ayudas/Beneficios."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Todos los recursos están verificados?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí, todos los recursos incluidos en esta guía han sido verificados. Los recursos marcados con ✅ han pasado un proceso de validación adicional para garantizar su fiabilidad y actualidad."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Puedo acceder a esta guía desde dispositivos móviles?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí, la guía está completamente optimizada para dispositivos móviles. Puedes acceder a todos los recursos, filtros y funcionalidades desde tu smartphone o tablet."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo filtrar recursos por etiquetas?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "En el panel de filtros, encontrarás una sección de etiquetas. Puedes seleccionar múltiples etiquetas como 'Online', 'Gratuito', 'Diagnóstico', etc. Los recursos se filtrarán automáticamente para mostrar solo los que coinciden."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué hacer si no encuentro lo que busco?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Prueba ajustando tus filtros o usando términos de búsqueda diferentes. Si aún así no encuentras lo que necesitas, puedes proponer un nuevo recurso para que lo incluyamos en la guía."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    .faq-container {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .faq-header h1 {
+      color: #8B4513;
+      margin-bottom: 10px;
+    }
+
+    .faq-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .faq-item {
+      margin-bottom: 20px;
+      padding: 20px;
+      background-color: #fff5e6;
+      border-left: 4px solid #8B4513;
+      border-radius: 4px;
+    }
+
+    .faq-question {
+      font-size: 18px;
+      font-weight: 600;
+      color: #8B4513;
+      margin-bottom: 12px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .faq-question::before {
+      content: "▶";
+      transition: transform 0.3s ease;
+      display: inline-block;
+    }
+
+    .faq-item.open .faq-question::before {
+      transform: rotate(90deg);
+    }
+
+    .faq-answer {
+      color: #5C4033;
+      line-height: 1.6;
+      display: none;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .back-link {
+      display: inline-block;
+      margin-bottom: 20px;
+      color: #8B4513;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .back-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container-main">
+    <header class="header" role="banner">
+      <nav class="header-content" role="navigation" aria-label="Navegación principal">
+        <div class="header-left">
+          <h1 class="logo">📚 Preguntas Frecuentes - Guía TEA</h1>
+        </div>
+      </nav>
+
+      <nav class="breadcrumb-nav" aria-label="Navegación de ruta">
+        <ol>
+          <li><a href="/">Inicio</a> <span aria-hidden="true">/</span></li>
+          <li><span aria-current="page">Preguntas Frecuentes</span></li>
+        </ol>
+      </nav>
+    </header>
+
+    <main class="faq-container" role="main">
+      <section class="faq-header">
+        <h2>Preguntas Frecuentes</h2>
+        <p>Encuentra respuestas a las preguntas más comunes sobre la Guía de Recursos TEA</p>
+        <a href="/" class="back-link">← Volver a la guía principal</a>
+      </section>
+
+      <ol class="faq-list" itemscope itemtype="https://schema.org/FAQPage">
+        <li class="faq-item" itemscope itemtype="https://schema.org/Question">
+          <h3 class="faq-question" itemprop="name">
+            ¿Qué es el TEA (Trastorno del Espectro Autista)?
+          </h3>
+          <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              El TEA es una condición del neurodesarrollo caracterizada por dificultades en la comunicación social,
+              patrones de comportamiento repetitivos e intereses restringidos. Se considera un espectro porque las
+              características varían significativamente entre individuos.
+            </p>
+          </div>
+        </li>
+
+        <li class="faq-item" itemscope itemtype="https://schema.org/Question">
+          <h3 class="faq-question" itemprop="name">
+            ¿Cómo usar esta guía de recursos?
+          </h3>
+          <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              Puedes buscar recursos usando la barra de búsqueda, filtrar por categorías (Salud, Educación, Entidades, etc.)
+              y por etiquetas específicas. Los resultados se actualizan en tiempo real según tus criterios de búsqueda.
+            </p>
+          </div>
+        </li>
+
+        <li class="faq-item" itemscope itemtype="https://schema.org/Question">
+          <h3 class="faq-question" itemprop="name">
+            ¿Dónde puedo proponer nuevos recursos?
+          </h3>
+          <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              Puedes proponer nuevos recursos a través del botón 'Proponer Recurso' en el pie de página.
+              Nos ayuda a mantener la guía actualizada con opciones relevantes para la comunidad TEA.
+            </p>
+          </div>
+        </li>
+
+        <li class="faq-item" itemscope itemtype="https://schema.org/Question">
+          <h3 class="faq-question" itemprop="name">
+            ¿Qué categorías de recursos están disponibles?
+          </h3>
+          <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              Contamos con 5 categorías principales: Salud y Diagnóstico, Educación y Atención Temprana,
+              Entidades y Apoyo Familiar, Vida Adulta/Vivienda/Empleo, y Trámites/Ayudas/Beneficios.
+            </p>
+          </div>
+        </li>
+
+        <li class="faq-item" itemscope itemtype="https://schema.org/Question">
+          <h3 class="faq-question" itemprop="name">
+            ¿Todos los recursos están verificados?
+          </h3>
+          <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              Sí, todos los recursos incluidos en esta guía han sido verificados. Los recursos marcados con ✅
+              han pasado un proceso de validación adicional para garantizar su fiabilidad y actualidad.
+            </p>
+          </div>
+        </li>
+
+        <li class="faq-item" itemscope itemtype="https://schema.org/Question">
+          <h3 class="faq-question" itemprop="name">
+            ¿Puedo acceder a esta guía desde dispositivos móviles?
+          </h3>
+          <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              Sí, la guía está completamente optimizada para dispositivos móviles. Puedes acceder a todos los recursos,
+              filtros y funcionalidades desde tu smartphone o tablet.
+            </p>
+          </div>
+        </li>
+
+        <li class="faq-item" itemscope itemtype="https://schema.org/Question">
+          <h3 class="faq-question" itemprop="name">
+            ¿Cómo filtrar recursos por etiquetas?
+          </h3>
+          <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              En el panel de filtros, encontrarás una sección de etiquetas. Puedes seleccionar múltiples etiquetas
+              como 'Online', 'Gratuito', 'Diagnóstico', etc. Los recursos se filtrarán automáticamente para mostrar
+              solo los que coinciden.
+            </p>
+          </div>
+        </li>
+
+        <li class="faq-item" itemscope itemtype="https://schema.org/Question">
+          <h3 class="faq-question" itemprop="name">
+            ¿Qué hacer si no encuentro lo que busco?
+          </h3>
+          <div class="faq-answer" itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+            <p itemprop="text">
+              Prueba ajustando tus filtros o usando términos de búsqueda diferentes. Si aún así no encuentras lo que necesitas,
+              puedes proponer un nuevo recurso para que lo incluyamos en la guía.
+            </p>
+          </div>
+        </li>
+      </ol>
+    </main>
+  </div>
+
+  <script>
+    // Hacer FAQs expandibles/colapsables
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const item = question.closest('.faq-item');
+        item.classList.toggle('open');
+      });
+
+      // Permitir navegación con teclado
+      question.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          question.click();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
