@@ -75,6 +75,18 @@ function renderCard(resource, categories = [], position = 1) {
       itemscope
       itemtype="${schemaType}">
 
+      ${resource.image ? `
+        <figure class="card-image">
+          <img
+            src="${escapeHtml(resource.image)}"
+            alt="${escapeHtml(resource.name)}"
+            loading="lazy"
+            decoding="async"
+            itemprop="image"
+          >
+        </figure>
+      ` : ''}
+
       <header class="card-header">
         <span class="card-icon" aria-hidden="true">${categoryIcon}</span>
         <h3 class="card-title" itemprop="name">${escapeHtml(resource.name)}</h3>
@@ -154,6 +166,16 @@ function renderGrid(resources, categories = []) {
 
   // Actualizar JSON-LD del ItemList
   updateItemListSchema(resources);
+
+  // Aplicar lazy loading a imágenes después de renderizar
+  setTimeout(() => {
+    document.querySelectorAll('.resource-card img[loading="lazy"]').forEach(img => {
+      if (!img.dataset.observed) {
+        img.dataset.observed = 'true';
+        // El navegador maneja lazy loading automáticamente con loading="lazy"
+      }
+    });
+  }, 0);
 
   return cards;
 }

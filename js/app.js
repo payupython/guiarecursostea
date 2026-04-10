@@ -235,6 +235,18 @@ function showResourceDetails(resource) {
   const category = appData.categories.find(c => c.id === resource.category) || {};
 
   let html = `
+    ${resource.image ? `
+      <figure style="margin: 0 0 24px 0; text-align: center;">
+        <img
+          src="${escapeHtml(resource.image)}"
+          alt="${escapeHtml(resource.name)}"
+          loading="lazy"
+          decoding="async"
+          style="max-width: 100%; height: auto; border-radius: 8px; max-height: 300px;"
+        >
+      </figure>
+    ` : ''}
+
     <h2 style="color: #8B4513; margin-bottom: 16px;">${escapeHtml(resource.name)}</h2>
 
     <div style="margin-bottom: 24px;">
@@ -247,7 +259,7 @@ function showResourceDetails(resource) {
         border: 1px solid #D4C4B0;
         display: inline-block;
       ">${category.name || 'Sin categoría'}</span>
-    </div>
+    </div>`;
 
     ${resource.location ? `
       <div style="margin-bottom: 16px;">
