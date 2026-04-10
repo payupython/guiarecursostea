@@ -112,6 +112,17 @@ function initializeSearch(resources, categories) {
       const results = applySearch(query, resourcesSource, categories);
 
       updateSearchUrl(query);
+
+      // Actualizar breadcrumb
+      if (window.updateBreadcrumb) {
+        const filters = window.getSelectedFilters?.();
+        window.updateBreadcrumb(
+          filters?.categories || [],
+          filters?.tags || [],
+          query
+        );
+      }
+
       if (query.length >= 2) {
         pushSearchEvent(query, results.length);
         if (results.length === 0) {

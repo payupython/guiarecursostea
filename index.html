@@ -71,6 +71,28 @@
   }
   </script>
 
+  <!-- BreadcrumbList para navegación -->
+  <script type="application/ld+json" data-schema="breadcrumb">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Inicio",
+        "item": "https://guia-tea.netlify.app"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Recursos",
+        "item": "https://guia-tea.netlify.app/"
+      }
+    ]
+  }
+  </script>
+
   <!-- ItemList de Recursos -->
   <script type="application/ld+json">
   {
@@ -117,6 +139,14 @@
           <h1 class="logo" data-section="site-title">📚 Diagnóstico de TEA: Guía Completa de Recursos y Apoyo para Padres</h1>
           <p class="tagline" data-section="site-description">200+ Servicios, Educación, Empleo y Ayudas para Autismo</p>
         </div>
+      </nav>
+
+      <!-- BREADCRUMB NAVIGATION -->
+      <nav class="breadcrumb-nav" aria-label="Navegación de ruta">
+        <ol aria-label="Migas de pan">
+          <li><a href="/">Inicio</a> <span aria-hidden="true">/</span></li>
+          <li><span aria-current="page">Recursos</span></li>
+        </ol>
       </nav>
 
       <!-- SEARCH BAR -->
@@ -224,6 +254,7 @@
 
   <!-- SCRIPTS -->
   <script src="js/utils.js"></script>
+  <script src="js/breadcrumb.js"></script>
   <script src="js/gamification.js"></script>
   <script src="js/search.js"></script>
   <script src="js/filter.js"></script>

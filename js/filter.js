@@ -155,6 +155,11 @@ function applyAllFilters() {
     results = searchResources(query, results);
   }
 
+  // Actualizar breadcrumb
+  if (window.updateBreadcrumb) {
+    window.updateBreadcrumb(selectedCategories, selectedTags, query);
+  }
+
   // Renderizar resultados
   const grid = document.getElementById('resourcesGrid');
   const categories = window.allCategories || [];
