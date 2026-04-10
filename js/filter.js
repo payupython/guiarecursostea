@@ -82,6 +82,7 @@ function handleCategoryChange(e) {
   });
 
   applyAllFilters();
+  updateFilterURL();
 }
 
 // RENDERIZAR GRID DE ETIQUETAS (TAGS)
@@ -131,6 +132,7 @@ function handleTagClick(e) {
   });
 
   applyAllFilters();
+  updateFilterURL();
 }
 
 // APLICAR TODOS LOS FILTROS Y BÚSQUEDA ACTUAL
@@ -202,6 +204,7 @@ function initializeClearFiltersBtn() {
 
     // Renderizar todos los recursos
     applyAllFilters();
+    updateFilterURL();
 
     // Feedback visual
     showNotification('Filtros limpiados', 'info');
@@ -244,6 +247,78 @@ function initializeMobileSidebar() {
   }
 }
 
+// ACTUALIZAR URL CON FILTROS ACTUALES
+function updateFilterURL() {
+  const params = new URLSearchParams();
+
+  // Agregar categorías a la URL
+  if (selectedCategories.length > 0) {
+    params.set('categories', selectedCategories.join(','));
+  }
+
+  // Agregar tags a la URL
+  if (selectedTags.length > 0) {
+    params.set('tags', selectedTags.join(','));
+  }
+
+  // Mantener búsqueda si existe
+  const searchInput = document.getElementById('searchInput');
+  if (searchInput && searchInput.value.trim()) {
+    params.set('q', searchInput.value.trim());
+  }
+
+  // Actualizar URL sin recargar la página
+  const queryString = params.toString();
+  const newURL = queryString ? `?${queryString}` : window.location.pathname;
+  window.history.replaceState({ filters: { categories: selectedCategories, tags: selectedTags } }, '', newURL);
+
+  console.log('🔗 URL actualizada:', newURL);
+}
+
+// LEER FILTROS DE LA URL Y APLICARLOS
+function applyFiltersFromURL() {
+  const params = new URLSearchParams(window.location.search);
+
+  // Leer categorías de la URL
+  const categoriesParam = params.get('categories');
+  if (categoriesParam) {
+    selectedCategories = categoriesParam.split(',').filter(c => c);
+    console.log('📂 Categorías desde URL:', selectedCategories);
+  }
+
+  // Leer tags de la URL
+  const tagsParam = params.get('tags');
+  if (tagsParam) {
+    selectedTags = tagsParam.split(',').filter(t => t);
+    console.log('#️⃣ Tags desde URL:', selectedTags);
+  }
+
+  // Marcar checkboxes y botones como seleccionados
+  if (selectedCategories.length > 0) {
+    selectedCategories.forEach(catId => {
+      const checkbox = document.getElementById(`cat-${catId}`);
+      if (checkbox) {
+        checkbox.checked = true;
+      }
+    });
+  }
+
+  if (selectedTags.length > 0) {
+    selectedTags.forEach(tagId => {
+      const button = document.querySelector(`[data-tag-id="${tagId}"]`);
+      if (button) {
+        button.classList.add('active');
+        button.setAttribute('aria-pressed', 'true');
+      }
+    });
+  }
+
+  // Aplicar los filtros
+  if (selectedCategories.length > 0 || selectedTags.length > 0) {
+    applyAllFilters();
+  }
+}
+
 // INICIALIZAR FILTROS
 function initializeFilters(resources, categories, tags) {
   console.log('🔧 Inicializando filtros con', resources?.length, 'recursos');
@@ -276,6 +351,9 @@ function initializeFilters(resources, categories, tags) {
 
   initializeClearFiltersBtn();
   initializeMobileSidebar();
+
+  // Aplicar filtros desde la URL
+  applyFiltersFromURL();
 
   console.log('✅ Filters completamente inicializado');
 }

@@ -58,13 +58,21 @@ function renderSearchResults(results, categories = []) {
   }
 }
 
-// ACTUALIZAR URL CON PARÁMETRO DE BÚSQUEDA (para GA4 Site Search)
+// ACTUALIZAR URL CON PARÁMETRO DE BÚSQUEDA (para GA4 Site Search) - preservando filtros
 function updateSearchUrl(query) {
   const url = new URL(window.location);
   if (query) {
     url.searchParams.set('q', query);
   } else {
     url.searchParams.delete('q');
+  }
+  // Preservar categorías y tags si existen
+  const filters = window.getSelectedFilters?.();
+  if (filters && filters.categories && filters.categories.length > 0) {
+    url.searchParams.set('categories', filters.categories.join(','));
+  }
+  if (filters && filters.tags && filters.tags.length > 0) {
+    url.searchParams.set('tags', filters.tags.join(','));
   }
   history.replaceState(null, '', url);
 }
