@@ -182,18 +182,28 @@ function renderGrid(resources, categories = []) {
 
 // Actualizar Schema ItemList con recursos reales
 function updateItemListSchema(resources) {
-  const itemListElement = resources.map((resource, index) => ({
-    "@type": "ListItem",
-    "position": index + 1,
-    "url": `https://guia-tea.netlify.app/?resource=${resource.id}`,
-    "name": resource.name
-  }));
+  const itemListElement = resources.map((resource, index) => {
+    const item = {
+      "@type": "ListItem",
+      "position": index + 1,
+      "url": `https://guia-tea.netlify.app/?resource=${resource.id}`,
+      "name": resource.name
+    };
+
+    // Agregar imagen si existe
+    if (resource.image) {
+      item.image = resource.image;
+    }
+
+    return item;
+  });
 
   const schema = {
     "@context": "https://schema.org",
     "@type": "ItemList",
     "itemListElement": itemListElement,
-    "numberOfItems": resources.length
+    "numberOfItems": resources.length,
+    "itemListOrder": "Ascending"
   };
 
   // Buscar o crear script de Schema para ItemList

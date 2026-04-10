@@ -39,7 +39,9 @@
       "Bash(npx -y @pkbibi/gtm-mcp --help)",
       "Bash(GOOGLE_APPLICATION_CREDENTIALS=\"/Volumes/Datos/GuiaRecursosTEA/guiarecursostea-e2db1dd18ad9 copia.json\" npx -y @toolsdk.ai/google-analytics-mcp --help)",
       "Bash(GOOGLE_APPLICATION_CREDENTIALS=\"/Volumes/Datos/GuiaRecursosTEA/guiarecursostea-e2db1dd18ad9 copia.json\" npx -y @toolsdk.ai/google-analytics-mcp)",
-      "Bash(GOOGLE_APPLICATION_CREDENTIALS=\"/Volumes/Datos/GuiaRecursosTEA/guiarecursostea-e2db1dd18ad9 copia.json\" npx @pkbibi/gtm-mcp)"
+      "Bash(GOOGLE_APPLICATION_CREDENTIALS=\"/Volumes/Datos/GuiaRecursosTEA/guiarecursostea-e2db1dd18ad9 copia.json\" npx @pkbibi/gtm-mcp)",
+      "Bash(cat)",
+      "Read(//tmp/**)"
     ]
   }
 }
