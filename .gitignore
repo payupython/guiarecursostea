@@ -35,3 +35,7 @@ guiarecursostea-*.json
 # Backups
 *.bak
 *.tmp
+
+# Reportes y documentación local
+REPORT_MEJORAS.md
+AUDITORÍA_SEO_SENIOR.md
