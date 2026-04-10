@@ -160,7 +160,7 @@ function updateResultsCount(count) {
     } else if (count === 1) {
       titleEl.textContent = '1 Recurso encontrado';
     } else {
-      titleEl.textContent = `${count} Recursos para el Ecosistema TEA`;
+      titleEl.textContent = `${count} Recursos para Padres tras Diagnóstico de TEA`;
     }
   }
 
