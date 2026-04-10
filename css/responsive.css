@@ -4,6 +4,14 @@
 
 /* TABLET - 768px and up */
 @media (min-width: 768px) {
+  .close-sidebar {
+    display: none !important;
+  }
+
+  #toggleFiltersBtn {
+    display: none !important;
+  }
+
   .tags-grid {
     grid-template-columns: repeat(2, 1fr);
   }
