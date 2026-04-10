@@ -7,7 +7,7 @@ let citiesData = [];
 // Cargar datos de ciudades
 async function loadCitiesData() {
   try {
-    const response = await fetch('./data/cities.json');
+    const response = await fetch('/data/cities.json');
     const data = await response.json();
     citiesData = data.cities;
     console.log('✅ Ciudades cargadas:', citiesData.length);

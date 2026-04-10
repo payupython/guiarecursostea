@@ -18,12 +18,8 @@ window.allTags = [];
 // CARGAR DATOS JSON
 async function loadData() {
   try {
-    // Construir ruta absoluta desde el directorio raíz
-    const basePath = window.location.pathname.includes('/pages/')
-      ? '../data/resources.json'
-      : './data/resources.json';
-
-    const response = await fetch(basePath);
+    // Usar ruta absoluta que funciona en cualquier contexto
+    const response = await fetch('/data/resources.json');
     if (!response.ok) {
       throw new Error(`Error loading data: ${response.status}`);
     }
