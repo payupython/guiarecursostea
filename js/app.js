@@ -274,7 +274,7 @@ function showResourceDetails(resource) {
         border: 1px solid #D4C4B0;
         display: inline-block;
       ">${category.name || 'Sin categoría'}</span>
-    </div>`;
+    </div>
 
     ${resource.location ? `
       <div style="margin-bottom: 16px;">
