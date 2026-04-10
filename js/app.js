@@ -151,25 +151,20 @@ function setupModal() {
   if (modalClose) {
     modalClose.addEventListener('click', () => {
       if (modal) {
-        modal.style.display = 'none';
+        modal.close();
       }
     });
   }
 
-  // Cerrar modal al hacer click fuera
+  // Cerrar modal al hacer click fuera (backdrop)
   if (modal) {
     modal.addEventListener('click', (e) => {
       if (e.target === modal) {
-        modal.style.display = 'none';
+        modal.close();
       }
     });
 
-    // Cerrar con tecla ESC
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && modal.style.display === 'block') {
-        modal.style.display = 'none';
-      }
-    });
+    // Cerrar con tecla ESC (automático en <dialog>)
   }
 }
 
@@ -359,7 +354,7 @@ function showResourceDetails(resource) {
   `;
 
   modalBody.innerHTML = html;
-  modal.style.display = 'flex';
+  modal.showModal();
 
   pushEvent('resource_detail_view', {
     resource_id: resource.id,

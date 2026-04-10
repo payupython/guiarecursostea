@@ -44,18 +44,16 @@ function renderCategoryFilters(categories) {
 
   container.innerHTML = categories
     .map(cat => `
-      <div class="category-item" data-filter-item="category" data-category-id="${cat.id}">
+      <li class="category-item">
         <input
           type="checkbox"
           id="cat-${cat.id}"
           value="${cat.id}"
           class="category-checkbox"
-          aria-label="Filtrar por ${cat.name}"
           data-category-id="${cat.id}"
-          data-filter="category"
         >
-        <label for="cat-${cat.id}" data-label="category">${cat.name}</label>
-      </div>
+        <label for="cat-${cat.id}">${cat.name}</label>
+      </li>
     `)
     .join('');
 
@@ -94,18 +92,16 @@ function renderTagFilters(tags) {
 
   container.innerHTML = tags
     .map(tag => `
-      <button
-        class="tag-button"
-        data-filter-item="tag"
-        data-tag-id="${tag.id}"
-        data-filter="tag"
-        data-category="${tag.category || ''}"
-        aria-label="Filtrar por etiqueta ${tag.label}"
-        aria-pressed="false"
-        role="switch"
-      >
-        ${tag.label}
-      </button>
+      <li>
+        <button
+          class="tag-button"
+          data-tag-id="${tag.id}"
+          aria-label="Filtrar por etiqueta ${tag.label}"
+          aria-pressed="false"
+        >
+          ${tag.label}
+        </button>
+      </li>
     `)
     .join('');
 

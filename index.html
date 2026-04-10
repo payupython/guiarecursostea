@@ -100,46 +100,46 @@
       </nav>
 
       <!-- SEARCH BAR -->
-      <section class="search-container" data-section="search" role="search">
+      <form class="search-container" role="search">
+        <label for="searchInput" class="sr-only">Buscar recursos</label>
         <input
-          type="text"
+          type="search"
           id="searchInput"
           class="search-input"
           placeholder="Buscar recursos... (ej: diagnóstico, escuela, empleo)"
           aria-label="Buscar recursos del directorio"
-          data-input="search-query"
         >
-        <div class="search-icon" aria-hidden="true">🔍</div>
-      </section>
+        <span class="search-icon" aria-hidden="true">🔍</span>
+      </form>
     </header>
 
     <!-- MAIN CONTENT -->
     <div class="main-wrapper">
       <!-- NAVIGATION - SIDEBAR FILTROS -->
-      <nav class="sidebar filters-panel" role="navigation" aria-label="Filtros de búsqueda">
-        <div class="filters-header">
+      <nav class="sidebar filters-panel" aria-label="Filtrar recursos TEA">
+        <header class="filters-header">
           <h2>Filtrar por</h2>
           <button id="closeSidebar" class="close-sidebar" aria-label="Cerrar filtros" style="display:none;">✕</button>
-        </div>
+        </header>
 
         <!-- FILTRO POR COLECCIONES (CATEGORÍAS) -->
-        <section class="filter-section" data-filter-type="categories">
-          <h3 class="filter-title">📂 Colecciones</h3>
-          <div class="categories-list" id="categoriesList" role="group" aria-label="Filtrar por categoría">
+        <fieldset class="filter-section">
+          <legend class="filter-title">📂 Colecciones</legend>
+          <ul id="categoriesList" class="categories-list" aria-label="Filtrar por categoría">
             <!-- Generado por JavaScript -->
-          </div>
-        </section>
+          </ul>
+        </fieldset>
 
         <!-- FILTRO POR ETIQUETAS -->
-        <section class="filter-section" data-filter-type="tags">
-          <h3 class="filter-title">#️⃣ Etiquetas</h3>
-          <div class="tags-grid" id="tagsList" role="group" aria-label="Filtrar por etiqueta">
+        <fieldset class="filter-section">
+          <legend class="filter-title">#️⃣ Etiquetas</legend>
+          <ul id="tagsList" class="tags-grid" aria-label="Filtrar por etiqueta">
             <!-- Generado por JavaScript -->
-          </div>
-        </section>
+          </ul>
+        </fieldset>
 
         <!-- BOTÓN LIMPIAR FILTROS -->
-        <button id="clearFiltersBtn" class="btn btn-secondary btn-full" data-action="clear-filters">
+        <button id="clearFiltersBtn" class="btn btn-secondary btn-full" aria-label="Eliminar todos los filtros aplicados">
           🔄 Limpiar Filtros
         </button>
       </nav>
@@ -190,15 +190,17 @@
     </footer>
   </div>
 
-  <!-- MODAL PARA DETALLES (OPCIONAL) -->
-  <div id="detailsModal" class="modal" style="display:none;">
-    <div class="modal-content">
-      <button class="modal-close" aria-label="Cerrar">&times;</button>
-      <div id="modalBody">
+  <!-- MODAL PARA DETALLES -->
+  <dialog id="detailsModal" class="modal">
+    <article class="modal-content">
+      <header>
+        <button class="modal-close" aria-label="Cerrar modal">&times;</button>
+      </header>
+      <section id="modalBody">
         <!-- Contenido generado por JavaScript -->
-      </div>
-    </div>
-  </div>
+      </section>
+    </article>
+  </dialog>
 
   <!-- SCRIPTS -->
   <script src="js/utils.js"></script>

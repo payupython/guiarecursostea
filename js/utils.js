@@ -44,9 +44,9 @@ function renderCard(resource, categories = []) {
     .join('');
 
   const contactsHTML = [
-    resource.phone ? `<div class="contact-item">📞 <a href="tel:${resource.phone}" title="Llamar">${resource.phone}</a></div>` : '',
-    resource.url ? `<div class="contact-item">🔗 <a href="${resource.url}" target="_blank" rel="noopener" title="Visitar sitio web">${resource.url.replace(/https?:\/\/(www\.)?/, '')}</a></div>` : '',
-    resource.contact ? `<div class="contact-item">✉️ <a href="mailto:${resource.contact}" title="Enviar email">${resource.contact}</a></div>` : ''
+    resource.phone ? `<li class="contact-item"><a href="tel:${resource.phone}" title="Llamar">📞 ${resource.phone}</a></li>` : '',
+    resource.url ? `<li class="contact-item"><a href="${resource.url}" target="_blank" rel="noopener" title="Visitar sitio web">🔗 ${resource.url.replace(/https?:\/\/(www\.)?/, '')}</a></li>` : '',
+    resource.contact ? `<li class="contact-item"><a href="mailto:${resource.contact}" title="Enviar email">✉️ ${resource.contact}</a></li>` : ''
   ].filter(html => html).join('');
 
   const html = `
@@ -55,62 +55,68 @@ function renderCard(resource, categories = []) {
       data-resource-name="${escapeHtml(resource.name)}"
       data-category="${resource.category}"
       data-category-name="${category.name || 'Sin categoría'}"
-      data-type="resource"
       ${resource.tags ? `data-tags="${resource.tags.join(',')}"` : ''}
       itemscope
-      itemtype="https://schema.org/LocalBusiness"
-      role="article">
+      itemtype="https://schema.org/LocalBusiness">
 
-      <header class="card-header" data-section="header">
-        <div class="card-icon" aria-hidden="true">${categoryIcon}</div>
-        <h3 class="card-title" itemprop="name" data-field="name">${escapeHtml(resource.name)}</h3>
+      <header class="card-header">
+        <span class="card-icon" aria-hidden="true">${categoryIcon}</span>
+        <h3 class="card-title" itemprop="name">${escapeHtml(resource.name)}</h3>
+        <mark class="card-category" data-category-id="${resource.category}">${category.name || 'Sin categoría'}</mark>
       </header>
 
-      <span class="card-category" data-field="category" data-category-id="${resource.category}">${category.name || 'Sin categoría'}</span>
-
       ${resource.location ? `
-        <section class="card-section" data-section="location">
-          <h4 class="card-section-title">📍 Ubicación</h4>
-          <div class="card-section-content" itemprop="address" data-field="location">${escapeHtml(resource.location)}</div>
+        <section class="card-section">
+          <h4>📍 Ubicación</h4>
+          <address itemprop="address">${escapeHtml(resource.location)}</address>
         </section>
       ` : ''}
 
-      <div class="card-divider" aria-hidden="true"></div>
+      <hr aria-hidden="true">
 
       ${resource.uniqueValueProp ? `
-        <section class="card-section" data-section="value-prop">
-          <h4 class="card-section-title">✨ Lo especial</h4>
-          <div class="card-section-content" data-field="unique-value">${escapeHtml(resource.uniqueValueProp)}</div>
+        <section class="card-section">
+          <h4>✨ Lo especial</h4>
+          <p>${escapeHtml(resource.uniqueValueProp)}</p>
         </section>
       ` : ''}
 
       ${resource.description ? `
-        <section class="card-section" data-section="description">
-          <h4 class="card-section-title">📝 Descripción</h4>
-          <div class="card-section-content" itemprop="description" data-field="description">${escapeHtml(resource.description)}</div>
+        <section class="card-section">
+          <h4>📝 Descripción</h4>
+          <p itemprop="description">${escapeHtml(resource.description)}</p>
         </section>
       ` : ''}
 
       ${servicesHTML ? `
-        <section class="card-section" data-section="services">
-          <h4 class="card-section-title">🎯 Servicios</h4>
-          <div class="card-services" role="list" data-field="services">${servicesHTML}</div>
+        <section class="card-section">
+          <h4>🎯 Servicios</h4>
+          <ul class="card-services">${servicesHTML.replace(/class="service-badge"/g, '<li class="service-badge"').replace(/<\/div>/g, '</li>')}</ul>
         </section>
       ` : ''}
 
       ${resource.ageRange ? `
-        <section class="card-section" data-section="age-range">
-          <div class="card-section-content"><strong>Edad:</strong> <span data-field="age-range" itemprop="targetGroup">${escapeHtml(resource.ageRange)}</span></div>
+        <section class="card-section">
+          <dl>
+            <dt>Edad:</dt>
+            <dd itemprop="targetGroup">${escapeHtml(resource.ageRange)}</dd>
+          </dl>
         </section>
       ` : ''}
 
       ${contactsHTML ? `
-        <div class="card-divider" aria-hidden="true"></div>
-        <section class="card-contact" data-section="contact" role="region" aria-label="Información de contacto">${contactsHTML}</section>
+        <hr aria-hidden="true">
+        <address class="card-contact" aria-label="Información de contacto">
+          <ul>${contactsHTML}</ul>
+        </address>
       ` : ''}
 
       ${tagsHTML ? `
-        <footer class="card-tags" data-section="tags" role="list">${tagsHTML}</footer>
+        <footer class="card-tags">
+          <ul>
+            ${tagsHTML.replace(/class="tag-label"/g, '<li class="tag-label"').replace(/<\/div>/g, '</li>')}
+          </ul>
+        </footer>
       ` : ''}
     </article>
   `;
