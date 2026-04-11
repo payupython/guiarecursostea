@@ -365,6 +365,38 @@
       "type": "publica",
       "keyServices": ["Valoración de Dependencia", "Servicios en Domicilio", "Ayuda Económica", "Asistencia Personal"],
       "verified": true
+    },
+    {
+      "id": "gatea-centro-formacion",
+      "name": "Gatea - Centro de Formación y Terapias",
+      "category": "educacion",
+      "tags": ["formacion", "terapias", "diagnostico"],
+      "description": "Centro sociosanitario especializado en formación, terapias e investigación en Trastornos del Espectro del Autismo. Ofrece diagnósticos, evaluaciones (ADOS-2), terapias especializadas y programas de formación profesional para familias y profesionales.",
+      "uniqueValueProp": "Centro multidisciplinario con certificación ADOS-2 y Master's degree en Autismo",
+      "url": "https://gatea.org/",
+      "contact": "info@gatea.org",
+      "phone": "+34 910 820 695",
+      "location": "Calle Luisa Fernada 12, Madrid 28008",
+      "ageRange": "Todas las edades",
+      "type": "privada",
+      "keyServices": ["Diagnóstico ADOS-2", "Terapias Especializadas", "Formación Profesional", "Apoyo Familiar"],
+      "verified": true
+    },
+    {
+      "id": "aleph-tea-asociacion",
+      "name": "ALEPH-TEA - Asociación Educación Personalizada",
+      "category": "entidades",
+      "tags": ["educacion-especial", "atenccion-temprana", "empleo", "apoyo-familiar"],
+      "description": "Asociación dedicada a la educación personalizada y humana de personas con TEA. Ofrece servicios de atención temprana, colegio de educación especial, programas de empleo, actividades de ocio y apoyo a familias. Enfoque basado en derechos humanos e inclusión social.",
+      "uniqueValueProp": "Asociación integral con servicios desde atención temprana hasta programas de empleo y vida adulta",
+      "url": "http://aleph-tea.org/",
+      "contact": "info@aleph-tea.org",
+      "phone": "+34 91 300 41 70",
+      "location": "c/ Cueva de Montesinos 49, Madrid 28034",
+      "ageRange": "0-60+ años (servicios para todo el ciclo vital)",
+      "type": "privada",
+      "keyServices": ["Atención Temprana", "Educación Especial", "Programa de Empleo", "Ocio y Tiempo Libre", "Apoyo Familiar"],
+      "verified": true
     }
   ]
 }
