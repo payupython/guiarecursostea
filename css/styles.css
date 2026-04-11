@@ -636,11 +636,15 @@ body {
   right: 0;
   bottom: 0;
   background-color: rgba(61, 40, 23, 0.7);
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   z-index: 1000;
   padding: var(--spacing-lg);
+}
+
+.modal[open] {
+  display: flex;
 }
 
 .modal-content {
